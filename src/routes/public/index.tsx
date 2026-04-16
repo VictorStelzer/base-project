@@ -4,7 +4,6 @@ import * as Pages from '@/pages/public';
 
 export const PublicRoutes = (
     <>
-        <Route path={routes.public.home} element={<Pages.HomeScreen />} />
-        <Route path={routes.public.empresas} element={<Pages.Empresas />} />
+        <Route path={routes.public.home} element={<Pages.Home />} />
     </>
 );

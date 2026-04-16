@@ -1,2 +1,1 @@
-export { HomeScreen } from "./home";
-export { Empresas } from "./empresas";
+export { Home } from "./home";

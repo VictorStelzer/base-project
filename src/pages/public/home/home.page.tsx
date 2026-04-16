@@ -1,10 +1,12 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-export const Empresas: React.FC = () => {
+const Home: React.FC = () => {
     return (
         <Box>
-            <Typography variant="h4">Empresas</Typography>
+            <Typography variant="h4">Home</Typography>
         </Box>
     )
 }
+
+export default Home
