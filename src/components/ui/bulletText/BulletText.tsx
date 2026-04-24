@@ -3,7 +3,6 @@ import React from 'react';
 import { Props } from './types';
 
 import { Text, Box } from '@/components';
-
 import { getColor } from '@/components/styles';
 
 import { useTheme } from '@mui/material/styles';
@@ -18,12 +17,12 @@ export const BulletText: React.FC<Props> = ({ bullet = {}, color, size, children
     const gap = bullet.gap ?? 1;
 
     return (
-        <Box row displayFlex="center" gap={gap} sx={{ alignItems: 'center' }}>
+        <Box row gap={gap} alignItems='center'>
             <Box
                 width={bulletSize}
                 height={bulletSize}
                 circle
-                bgColor={bulletColor}
+                bgcolor={bulletColor}
                 sx={{ minWidth: bulletSize }}
             />
             <Text {...textProps} sx={{ color: textColor, fontSize: textSize, ...textProps.sx }}>

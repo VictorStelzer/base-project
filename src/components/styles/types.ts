@@ -55,7 +55,7 @@ export interface FlexProps {
 export interface BaseHoverProps {
     shadow?: number;
     shadowColor?: string;
-    bg?: string;
+    bgcolor?: string;
     color?: string;
     textColor?: string;
     borderColor?: string;

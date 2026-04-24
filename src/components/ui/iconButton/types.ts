@@ -2,7 +2,7 @@ import { IconButtonProps } from '@mui/material';
 import { BaseHoverProps, SpacingProps, SizeProps, RadiusProps, FlexProps } from '@/components/styles';
 
 /** HoverProps do IconButton — suporta shadow, bg, color, border e scale. */
-export interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'bg' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> {}
+export interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> {}
 
 /**
  * Propriedades do componente IconButton, mesclando MUI com as nossas customizações.

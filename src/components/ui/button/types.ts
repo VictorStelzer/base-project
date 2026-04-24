@@ -1,7 +1,7 @@
 import { ButtonProps } from '@mui/material';
 import { BaseHoverProps, SpacingProps, SizeProps, RadiusProps, FlexProps } from '@/components/styles';
 
-/** HoverProps do Button — color afeta o fundo (bg), textColor afeta a cor do texto. */
+/** HoverProps do Button — color afeta o fundo (bgcolor), textColor afeta a cor do texto. */
 export interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'color' | 'textColor' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> {}
 
 /**

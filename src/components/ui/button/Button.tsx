@@ -20,7 +20,7 @@ const StyledButton = styled(MuiButton, {
             'textColor',
         ] as string[]).includes(prop as string),
 })<Props>(({ theme, ...props }) => {
-    // Button tem hover próprio: color = bg, textColor = color
+    // Button tem hover próprio: color = bgcolor, textColor = color
     const hoverStyles: CSSObject = props.hover ? {
         transition: 'all 0.2s ease-in-out',
         '&:hover': {

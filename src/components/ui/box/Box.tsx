@@ -6,7 +6,9 @@ import { Box as MuiBox } from '@mui/material';
 
 import { styled, CSSObject, alpha } from '@mui/material/styles';
 
-import { getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS } from '@/components/styles';
+import {
+    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS
+} from '@/components/styles';
 
 const applyColorToShadow = (shadowStr: string, colorHex?: string) => {
     if (!shadowStr || shadowStr === 'none' || !colorHex) return shadowStr;
@@ -25,7 +27,7 @@ export const Box = styled(MuiBox as any, {
             ...SPACING_PROPS,
             ...HOVER_PROPS,
             ...SIZE_PROPS,
-            'shadow', 'shadowSecondary', 'shadowColor', 'paper', 'bgColor',
+            'shadow', 'shadowSecondary', 'shadowColor', 'paper', 'bgcolor',
         ] as string[]).includes(prop as string),
 })<Props>(({ theme, ...props }) => {
     // Box tem hover próprio por causa do shadowColor customizado
@@ -39,7 +41,7 @@ export const Box = styled(MuiBox as any, {
             }),
             ...(props.hover.color && { color: getColor(theme, props.hover.color) }),
             ...(props.hover.opacity !== undefined && { opacity: props.hover.opacity }),
-            ...(props.hover.bg && { backgroundColor: getColor(theme, props.hover.bg) }),
+            ...(props.hover.bgcolor && { backgroundColor: getColor(theme, props.hover.bgcolor) }),
             ...(props.hover.borderColor && {
                 borderColor: getColor(theme, props.hover.borderColor),
                 borderStyle: 'solid',
@@ -58,9 +60,12 @@ export const Box = styled(MuiBox as any, {
         // --- Espaçamento (Padding/Margin) ---
         ...getSpacingStyles(theme, props),
 
+        // --- Tamanho ---
+        ...getSizeStyles(theme, props),
+
         // --- Estética e Cores ---
         ...(props.paper && { backgroundColor: theme.palette.background.paper }),
-        ...(props.bgColor && { backgroundColor: getColor(theme, props.bgColor) }),
+        ...(props.bgcolor && { backgroundColor: getColor(theme, props.bgcolor) }),
 
         // --- Arredondamento ---
         ...getRadiusStyles(theme, props),

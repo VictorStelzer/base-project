@@ -16,7 +16,7 @@ export const Paper = styled(MuiPaper, {
             ...LAYOUT_PROPS,
             ...SPACING_PROPS,
             ...HOVER_PROPS,
-            'height', 'width', 'bgColor', 'glass',
+            'height', 'width', 'bgcolor', 'glass',
         ] as string[]).includes(prop as string),
 })<Props>(({ theme, ...props }) => {
     return {
@@ -29,7 +29,7 @@ export const Paper = styled(MuiPaper, {
         // Paper usa getSpacingStyles (p pode ser boolean, number ou string)
         ...getSpacingStyles(theme, props),
 
-        ...(props.bgColor && { backgroundColor: getColor(theme, props.bgColor) }),
+        ...(props.bgcolor && { backgroundColor: getColor(theme, props.bgcolor) }),
         ...(props.glass && {
             backgroundColor: theme.palette.mode === 'dark' ? alpha('#000', 0.2) : alpha('#fff', 0.2),
             backdropFilter: 'blur(10px)',

@@ -129,7 +129,7 @@ export const getHoverStyles = (
         transition: 'all 0.2s ease-in-out',
         '&:hover': isObject ? {
             ...(hover.shadow !== undefined && { boxShadow: theme.shadows[hover.shadow] }),
-            ...(hover.bg && { backgroundColor: getColor(theme, hover.bg) }),
+            ...(hover.bgcolor && { backgroundColor: getColor(theme, hover.bgcolor) }),
             ...(hover.color && { color: getColor(theme, hover.color) }),
             ...(hover.textColor && { color: getColor(theme, hover.textColor) }),
             ...(hover.opacity !== undefined && { opacity: hover.opacity }),
