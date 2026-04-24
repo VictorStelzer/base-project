@@ -4,6 +4,8 @@ import '@mui/material/styles';
 export interface ThemeContextData {
   mode: 'light' | 'dark';
   toggleTheme: () => void;
+  layoutType: 'auth' | 'unauth';
+  setLayoutType: (layout: 'auth' | 'unauth') => void;
 }
 
 export interface ThemeProviderProps {

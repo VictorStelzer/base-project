@@ -1,45 +1,45 @@
 ## Componentes 
 
 # ui
-- [ ] Box
-- [ ] Paper
+- [X] Box
+- [X] Paper
 
-- [ ] Text
-- [ ] BulletText
+- [X] Text
+- [X] BulletText
+- [X] IconText
 
-- [ ] Button
-- [ ] BackButton
-- [ ] IconButton
-- [ ] TextButton
-- [ ] LoadingButton
+- [X] Button
+- [X] BackButton
+- [X] IconButton
+- [X] TextButton
 
 - [ ] Input
+- [ ] TextArea
 - [ ] Select
 - [ ] Checkbox
+- [ ] Input Date
+- [ ] Autocomplete
 - [ ] Radio
 - [ ] Switch
 - [ ] Slider
-- [ ] Autocomplete
 - [ ] FileUpload
-- [ ] Input Date
 - [ ] Rating
 
-- [ ] Tabs
-- [ ] Table
-- [ ] Stepper
 - [ ] Accordion
+- [ ] Stepper
+- [ ] Table
 - [ ] Pagination
 - [ ] ProgressBar
+- [ ] Tabs
 
+- [ ] Divider
 - [ ] Avatar
 - [ ] Badge
 - [ ] Chip
-- [ ] Divider
 - [ ] List
 
 - [ ] Image
 - [ ] Icon
-
 
 # Feedback
 - [ ] Loading (circular, linear)
@@ -63,6 +63,7 @@
 # Layout
 - [ ] Header
 - [ ] Footer
+- [ ] PageContainer
 
 - [ ] Sidebar
 
