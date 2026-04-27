@@ -15,4 +15,5 @@ export * from './input'
 export * from './chip'
 export * from './badge'
 
+export * from './image'
 export * from './icon'

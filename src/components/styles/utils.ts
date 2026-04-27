@@ -145,8 +145,17 @@ export const getHoverStyles = (
         borderColor: 'transparent',
     } : {};
 
+    // Adiciona overflow hidden na box e transição nos filhos para o efeito de "zoom interno"
+    const zoomStyles = isObject && hover.zoom ? {
+        overflow: 'hidden',
+        '& > *': {
+            transition: 'transform 0.2s ease-in-out',
+        }
+    } : {};
+
     return {
         ...baseBorderStyles,
+        ...zoomStyles,
         transition: 'all 0.2s ease-in-out',
         '&:hover': isObject ? {
             ...((hover.shadow !== undefined || hover.shadowColor) && { 
@@ -162,6 +171,11 @@ export const getHoverStyles = (
                 borderColor: getColor(theme, hover.borderColor),
             }),
             ...(hover.scale && { transform: `scale(${hover.scale})` }),
+            ...(hover.zoom && {
+                '& > *': {
+                    transform: `scale(${hover.zoom})`,
+                }
+            }),
         } : {
             boxShadow: theme.shadows[6],
             backgroundColor: theme.palette.action.hover,

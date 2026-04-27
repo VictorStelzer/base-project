@@ -2,7 +2,7 @@ import { BoxProps } from '@mui/material';
 import { BaseHoverProps, SpacingProps, FlexProps, RadiusProps, SizeProps, SPACING_PROPS, FLEX_PROPS, SIZE_PROPS } from '@/components/styles';
 
 /** HoverProps do Box — inclui shadowColor por suportar sombra colorida. */
-export interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'shadowColor' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> {}
+export interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'shadowColor' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'zoom' | 'opacity'> {}
 
 type ConflictingProps = typeof SPACING_PROPS[number] | typeof FLEX_PROPS[number] | typeof SIZE_PROPS[number];
 

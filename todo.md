@@ -33,12 +33,12 @@
 
 - [ ] Divider
 - [ ] Avatar
-- [ ] Badge
-- [ ] Chip
+- [X] Badge
+- [X] Chip
 - [ ] List
 
-- [ ] Image
-- [ ] Icon
+- [X] Image
+- [X] Icon
 
 # Feedback
 - [ ] Loading (circular, linear)

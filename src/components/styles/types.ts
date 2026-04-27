@@ -61,5 +61,6 @@ export interface BaseHoverProps {
     borderColor?: string;
     borderWidth?: number;
     scale?: number;
+    zoom?: number;
     opacity?: number;
 }
