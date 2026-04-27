@@ -1,8 +1,21 @@
 import { Theme } from '@mui/material';
 
-import { CSSObject } from '@mui/material/styles';
+import { CSSObject, alpha } from '@mui/material/styles';
 
 import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps } from './types';
+
+/**
+ * Helper para aplicar cor às sombras.
+ */
+export const applyColorToShadow = (shadowStr: string, colorHex?: string) => {
+    if (!shadowStr || shadowStr === 'none' || !colorHex) return shadowStr;
+    try {
+        const colorWithAlpha = alpha(colorHex, 0.4);
+        return shadowStr.replace(/rgba?\([^)]+\)/g, colorWithAlpha);
+    } catch {
+        return shadowStr.replace(/rgba?\([^)]+\)/g, colorHex);
+    }
+};
 
 /**
  * Helper para resolver caminhos de cores no tema do Material UI (ex: "primary.main").
@@ -124,19 +137,29 @@ export const getHoverStyles = (
     if (!hover) return {};
 
     const isObject = typeof hover === 'object';
+    
+    // Base styles para transição suave de borda sem perder o radius e sem piscar em preto
+    const baseBorderStyles = isObject && hover.borderColor ? {
+        borderStyle: 'solid',
+        borderWidth: `${hover.borderWidth || 1}px`,
+        borderColor: 'transparent',
+    } : {};
 
     return {
+        ...baseBorderStyles,
         transition: 'all 0.2s ease-in-out',
         '&:hover': isObject ? {
-            ...(hover.shadow !== undefined && { boxShadow: theme.shadows[hover.shadow] }),
+            ...((hover.shadow !== undefined || hover.shadowColor) && { 
+                boxShadow: hover.shadowColor 
+                    ? applyColorToShadow(theme.shadows[hover.shadow ?? 6], getColor(theme, hover.shadowColor)) 
+                    : theme.shadows[hover.shadow as number] 
+            }),
             ...(hover.bgcolor && { backgroundColor: getColor(theme, hover.bgcolor) }),
             ...(hover.color && { color: getColor(theme, hover.color) }),
             ...(hover.textColor && { color: getColor(theme, hover.textColor) }),
             ...(hover.opacity !== undefined && { opacity: hover.opacity }),
             ...(hover.borderColor && {
                 borderColor: getColor(theme, hover.borderColor),
-                borderStyle: 'solid',
-                borderWidth: `${hover.borderWidth || 1}px`,
             }),
             ...(hover.scale && { transform: `scale(${hover.scale})` }),
         } : {

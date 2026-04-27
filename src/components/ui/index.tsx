@@ -12,4 +12,7 @@ export * from './backButton'
 
 export * from './input'
 
+export * from './chip'
+export * from './badge'
+
 export * from './icon'

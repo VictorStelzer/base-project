@@ -4,21 +4,11 @@ import { Props } from './types';
 
 import { Box as MuiBox } from '@mui/material';
 
-import { styled, CSSObject, alpha } from '@mui/material/styles';
+import { styled, CSSObject } from '@mui/material/styles';
 
 import {
-    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS
+    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, getHoverStyles, applyColorToShadow, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS
 } from '@/components/styles';
-
-const applyColorToShadow = (shadowStr: string, colorHex?: string) => {
-    if (!shadowStr || shadowStr === 'none' || !colorHex) return shadowStr;
-    try {
-        const colorWithAlpha = alpha(colorHex, 0.4);
-        return shadowStr.replace(/rgba?\([^)]+\)/g, colorWithAlpha);
-    } catch {
-        return shadowStr.replace(/rgba?\([^)]+\)/g, colorHex);
-    }
-};
 
 export const Box = styled(MuiBox as any, {
     shouldForwardProp: (prop) =>
@@ -30,28 +20,7 @@ export const Box = styled(MuiBox as any, {
             'shadow', 'shadowSecondary', 'shadowColor', 'paper', 'bgcolor',
         ] as string[]).includes(prop as string),
 })<Props>(({ theme, ...props }) => {
-    // Box tem hover próprio por causa do shadowColor customizado
-    const hoverStyles: CSSObject = props.hover ? {
-        transition: 'all 0.2s ease-in-out',
-        '&:hover': typeof props.hover === 'object' ? {
-            ...((props.hover.shadow !== undefined || props.hover.shadowColor) && {
-                boxShadow: props.hover.shadowColor
-                    ? applyColorToShadow(theme.shadows[props.hover.shadow ?? 6], getColor(theme, props.hover.shadowColor))
-                    : theme.shadows[props.hover.shadow as number]
-            }),
-            ...(props.hover.color && { color: getColor(theme, props.hover.color) }),
-            ...(props.hover.opacity !== undefined && { opacity: props.hover.opacity }),
-            ...(props.hover.bgcolor && { backgroundColor: getColor(theme, props.hover.bgcolor) }),
-            ...(props.hover.borderColor && {
-                borderColor: getColor(theme, props.hover.borderColor),
-                borderStyle: 'solid',
-                borderWidth: `${props.hover.borderWidth || 1}px`
-            }),
-            ...(props.hover.scale && { transform: `scale(${props.hover.scale})` })
-        } : {
-            boxShadow: theme.shadows[6],
-        }
-    } : {};
+    // Box agora usa o getHoverStyles global que suporta shadowColor
 
     return {
         // --- Layout Flexbox ---
@@ -82,6 +51,6 @@ export const Box = styled(MuiBox as any, {
                 : theme.shadows[1]
         }),
 
-        ...hoverStyles
+        ...getHoverStyles(theme, props.hover)
     } as CSSObject;
 }) as React.FC<Props>;
