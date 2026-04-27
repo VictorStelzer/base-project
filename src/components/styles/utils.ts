@@ -14,11 +14,11 @@ import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps } from 
  */
 export const getColor = (theme: Theme, colorPath?: string): string | undefined => {
     if (!colorPath) return undefined;
-    
+
     // Divide o caminho (ex: 'primary.main' -> ['primary', 'main'])
     const parts = colorPath.split('.');
     let result: unknown = theme.palette;
-    
+
     for (const part of parts) {
         if (result && typeof result === 'object' && part in (result as Record<string, unknown>)) {
             result = (result as Record<string, unknown>)[part];
@@ -27,7 +27,7 @@ export const getColor = (theme: Theme, colorPath?: string): string | undefined =
             return colorPath;
         }
     }
-    
+
     return typeof result === 'string' ? result : colorPath;
 };
 

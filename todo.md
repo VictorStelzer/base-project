@@ -13,8 +13,7 @@
 - [X] IconButton
 - [X] TextButton
 
-- [ ] Input
-- [ ] TextArea
+- [X] Input
 - [ ] Select
 - [ ] Checkbox
 - [ ] Input Date
