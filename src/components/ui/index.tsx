@@ -11,3 +11,5 @@ export * from './textButton'
 export * from './backButton'
 
 export * from './input'
+
+export * from './icon'

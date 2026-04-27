@@ -7,9 +7,17 @@ export interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'bgcolor' | 
 /**
  * Propriedades do componente IconButton, mesclando MUI com as nossas customizações.
  */
-export interface Props extends Omit<IconButtonProps, 'size'>, SpacingProps, SizeProps, RadiusProps, FlexProps {
+export interface Props extends Omit<IconButtonProps, 'size' | 'color'>, SpacingProps, SizeProps, RadiusProps, FlexProps {
     /** Efeito de hover. Se true, aplica um efeito padrão. Se objeto, aplica propriedades customizadas. */
     hover?: boolean | HoverProps;
     /** Tamanho do ícone */
     size?: number | string;
+    /** A cor do botão (ícone). Aceita caminhos do tema. */
+    color?: string;
+    /** 
+     * Define o fundo do botão. 
+     * Se true, aplica uma opacidade de 10% da cor definida.
+     * Se string, aplica a cor informada.
+     */
+    bg?: boolean | string;
 }

@@ -12,7 +12,7 @@ export const IconText: React.FC<Props> = ({ icon, color, size, children, ...text
     const theme = useTheme();
 
     const iconColor = icon.color ? getColor(theme, icon.color) : (color ? getColor(theme, color) : theme.palette.primary.main);
-    const iconSize = icon.size || size || '1.25rem';
+    const iconSize = icon.size || (typeof size === 'number' ? size + 4 : 16);
     const textColor = color ? getColor(theme, color) : undefined;
     const textSize = size;
     const gap = icon.gap ?? 1;
@@ -38,8 +38,13 @@ export const IconText: React.FC<Props> = ({ icon, color, size, children, ...text
                 textAlign: isVertical ? 'center' : 'left',
             }}
         >
-            <Box center sx={{ color: iconColor, fontSize: iconSize, display: 'flex', '& .MuiSvgIcon-root': { fontSize: 'inherit' } }}>
-                {icon.icon}
+        <Box center sx={{ color: iconColor, fontSize: iconSize, display: 'flex', '& .MuiSvgIcon-root': { fontSize: 'inherit' } }}>
+                {React.isValidElement(icon.icon) 
+                    ? React.cloneElement(icon.icon as React.ReactElement<any>, {
+                        ...(icon.color || color ? { color: icon.color || color } : {}),
+                        ...(icon.size || size ? { size: icon.size || size } : {}),
+                    })
+                    : icon.icon}
             </Box>
             <Text {...textProps} sx={{ color: textColor, fontSize: textSize, ...textProps.sx }}>
                 {children}
