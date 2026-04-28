@@ -24,14 +24,14 @@
 - [ ] FileUpload
 - [ ] Rating
 
-- [ ] Accordion
+- [X] Accordion
 - [ ] Stepper
 - [ ] Table
 - [ ] Pagination
 - [ ] ProgressBar
 - [ ] Tabs
 
-- [ ] Divider
+- [X] Divider
 - [ ] Avatar
 - [X] Badge
 - [X] Chip
