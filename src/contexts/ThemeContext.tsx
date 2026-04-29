@@ -1,7 +1,10 @@
+import { getTheme } from '@/themes';
+
 import React, { createContext, useState, useMemo } from 'react';
-import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
-import { getTheme } from '../themes';
+
 import type { ThemeContextData, ThemeProviderProps } from '@/types';
+
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 
 export const ThemeContext = createContext<ThemeContextData | undefined>(undefined);
 
