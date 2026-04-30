@@ -75,7 +75,7 @@ export const getSpacingStyles = (theme: Theme, props: SpacingProps): CSSObject =
  * Gera os estilos de borda arredondada.
  */
 export const getRadiusStyles = (theme: Theme, props: RadiusProps): CSSObject => {
-    if (props.circle) return { borderRadius: '50%' };
+    if (props.circle) return { borderRadius: '50px' };
     if (props.square) return { borderRadius: 0 };
     if (props.radius !== undefined) {
         return { borderRadius: typeof props.radius === 'number' ? props.radius : theme.shape.borderRadius };
@@ -115,6 +115,8 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
             flexDirection: (props.column || props.displayFlex === 'column') ? 'column' : 'row'
         }),
         ...(props.gap !== undefined && { gap: typeof props.gap === 'number' ? theme.spacing(props.gap) : props.gap }),
+        ...(props.justifyContent && { justifyContent: 'center' }),
+        ...(props.alignItems && { alignItems: 'center' }),
         ...((props.center || props.displayFlex === 'center') && {
             justifyContent: 'center',
             alignItems: 'center'
@@ -122,8 +124,6 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         ...(props.between && { justifyContent: 'space-between' }),
         ...(props.around && { justifyContent: 'space-around' }),
         ...(props.evenly && { justifyContent: 'space-evenly' }),
-        ...(props.justifyContent && { justifyContent: 'center' }),
-        ...(props.alignItems && { alignItems: 'center' }),
         ...(props.full && { width: '100%', height: '100%' }),
     };
 };
