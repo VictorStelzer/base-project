@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useThemeMode } from '@/hooks/useThemeMode';
+import { Footer, Header } from '@/components';
 
 const NotAuthenticatedLayout = () => {
   const { setLayoutType } = useThemeMode();
@@ -11,7 +12,9 @@ const NotAuthenticatedLayout = () => {
 
   return (
     <>
+      <Header />
       <Outlet />
+      <Footer />
     </>
   );
 };

@@ -44,6 +44,8 @@ export interface FlexProps {
     around?: boolean;
     evenly?: boolean;
     full?: boolean;
+    justifyContent?: boolean;
+    alignItems?: boolean;
     gap?: number | string;
 }
 

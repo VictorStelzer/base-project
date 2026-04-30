@@ -10,7 +10,7 @@ export const SPACING_PROPS = [
 
 export const FLEX_PROPS = [
     'displayFlex', 'row', 'column', 'center', 'between', 'around',
-    'evenly', 'full', 'gap',
+    'evenly', 'full', 'gap', 'alignItems', 'justifyContent'
 ] as const;
 
 export const RADIUS_PROPS = [

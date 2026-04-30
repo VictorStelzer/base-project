@@ -105,6 +105,8 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         props.between ||
         props.around ||
         props.evenly ||
+        props.justifyContent ||
+        props.alignItems ||
         props.gap !== undefined;
 
     return {
@@ -120,6 +122,8 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         ...(props.between && { justifyContent: 'space-between' }),
         ...(props.around && { justifyContent: 'space-around' }),
         ...(props.evenly && { justifyContent: 'space-evenly' }),
+        ...(props.justifyContent && { justifyContent: 'center' }),
+        ...(props.alignItems && { alignItems: 'center' }),
         ...(props.full && { width: '100%', height: '100%' }),
     };
 };
