@@ -18,6 +18,7 @@ const StyledButton = styled(MuiButton, {
             ...LAYOUT_PROPS,
             ...SIZE_PROPS,
             'textColor',
+            'uppercase',
         ] as string[]).includes(prop as string),
 })<Props>(({ theme, ...props }) => {
     // Button tem hover próprio: color = bgcolor, textColor = color
@@ -38,6 +39,7 @@ const StyledButton = styled(MuiButton, {
     } : {};
 
     return {
+        textTransform: props.uppercase ? 'uppercase' : 'none',
         ...(props.textColor && { color: getColor(theme, props.textColor) }),
         ...getSizeStyles(theme, props),
         ...getFlexStyles(theme, props),

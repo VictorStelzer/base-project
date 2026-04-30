@@ -141,7 +141,7 @@ export const getHoverStyles = (
     if (!hover) return {};
 
     const isObject = typeof hover === 'object';
-    
+
     // Base styles para transição suave de borda sem perder o radius e sem piscar em preto
     const baseBorderStyles = isObject && hover.borderColor ? {
         borderStyle: 'solid',
@@ -162,10 +162,10 @@ export const getHoverStyles = (
         ...zoomStyles,
         transition: 'all 0.2s ease-in-out',
         '&:hover': isObject ? {
-            ...((hover.shadow !== undefined || hover.shadowColor) && { 
-                boxShadow: hover.shadowColor 
-                    ? applyColorToShadow(theme.shadows[hover.shadow ?? 6], getColor(theme, hover.shadowColor)) 
-                    : theme.shadows[hover.shadow as number] 
+            ...((hover.shadow !== undefined || hover.shadowColor) && {
+                boxShadow: hover.shadowColor
+                    ? applyColorToShadow(theme.shadows[hover.shadow ?? 6], getColor(theme, hover.shadowColor))
+                    : theme.shadows[hover.shadow as number]
             }),
             ...(hover.bgcolor && { backgroundColor: getColor(theme, hover.bgcolor) }),
             ...(hover.color && { color: getColor(theme, hover.color) }),

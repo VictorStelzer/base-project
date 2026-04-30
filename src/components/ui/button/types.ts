@@ -12,4 +12,6 @@ export interface Props extends ButtonProps, SpacingProps, SizeProps, RadiusProps
     textColor?: string;
     /** Efeito de hover. Se objeto, aplica propriedades customizadas. */
     hover?: HoverProps;
+    /** Transforma o texto do botão em maiúsculo */
+    uppercase?: boolean;
 }
