@@ -2,7 +2,44 @@ import { Theme } from '@mui/material';
 
 import { CSSObject, alpha } from '@mui/material/styles';
 
-import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps } from './types';
+import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey } from './types';
+
+/**
+ * Helper para agrupar e mesclar estilos responsivos (objetos { xs, sm, md, lg, xl })
+ * em um único CSSObject sem sobrescrever media queries.
+ */
+export const applyResponsiveStyles = (
+    theme: Theme,
+    configs: { value: any; getStyles: (val: any) => CSSObject }[]
+): CSSObject => {
+    const result: CSSObject = {};
+    const breakpoints: BreakpointKey[] = ['xs', 'sm', 'md', 'lg', 'xl'];
+
+    configs.forEach(({ value, getStyles }) => {
+        if (value === undefined) return;
+
+        if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+            breakpoints.forEach((bp) => {
+                if (value[bp] !== undefined) {
+                    const styles = getStyles(value[bp]);
+                    if (bp === 'xs') {
+                        Object.assign(result, styles);
+                    } else {
+                        const mq = theme.breakpoints.up(bp);
+                        result[mq] = {
+                            ...(result[mq] as CSSObject || {}),
+                            ...styles
+                        };
+                    }
+                }
+            });
+        } else {
+            Object.assign(result, getStyles(value));
+        }
+    });
+
+    return result;
+};
 
 /**
  * Helper para aplicar cor às sombras.
@@ -50,32 +87,36 @@ export const getColor = (theme: Theme, colorPath?: string): string | undefined =
  * Para Button, IconButton e TextButton, `p` deve ser number | string.
  */
 export const getSpacingStyles = (theme: Theme, props: SpacingProps): CSSObject => {
-    const sp = (v: string | number) => typeof v === 'number' ? theme.spacing(v) : v;
-    return {
-        ...(props.p !== undefined && {
-            padding: props.p === true ? '20px' : sp(props.p as string | number),
-        }),
-        ...(props.pr !== undefined && { paddingRight: sp(props.pr) }),
-        ...(props.pl !== undefined && { paddingLeft: sp(props.pl) }),
-        ...(props.pt !== undefined && { paddingTop: sp(props.pt) }),
-        ...(props.pb !== undefined && { paddingBottom: sp(props.pb) }),
-        ...(props.px !== undefined && { paddingLeft: sp(props.px), paddingRight: sp(props.px) }),
-        ...(props.py !== undefined && { paddingTop: sp(props.py), paddingBottom: sp(props.py) }),
-        ...(props.m !== undefined && { margin: sp(props.m) }),
-        ...(props.mr !== undefined && { marginRight: sp(props.mr) }),
-        ...(props.ml !== undefined && { marginLeft: sp(props.ml) }),
-        ...(props.mt !== undefined && { marginTop: sp(props.mt) }),
-        ...(props.mb !== undefined && { marginBottom: sp(props.mb) }),
-        ...(props.mx !== undefined && { marginLeft: sp(props.mx), marginRight: sp(props.mx) }),
-        ...(props.my !== undefined && { marginTop: sp(props.my), marginBottom: sp(props.my) }),
+    const sp = (v: string | number | boolean): string | number => {
+        if (v === true) return '20px';
+        if (v === false) return 0;
+        if (typeof v === 'number') return theme.spacing(v);
+        return v;
     };
+
+    return applyResponsiveStyles(theme, [
+        { value: props.p, getStyles: (v) => ({ padding: sp(v) }) },
+        { value: props.pr, getStyles: (v) => ({ paddingRight: sp(v) }) },
+        { value: props.pl, getStyles: (v) => ({ paddingLeft: sp(v) }) },
+        { value: props.pt, getStyles: (v) => ({ paddingTop: sp(v) }) },
+        { value: props.pb, getStyles: (v) => ({ paddingBottom: sp(v) }) },
+        { value: props.px, getStyles: (v) => ({ paddingLeft: sp(v), paddingRight: sp(v) }) },
+        { value: props.py, getStyles: (v) => ({ paddingTop: sp(v), paddingBottom: sp(v) }) },
+        { value: props.m, getStyles: (v) => ({ margin: sp(v) }) },
+        { value: props.mr, getStyles: (v) => ({ marginRight: sp(v) }) },
+        { value: props.ml, getStyles: (v) => ({ marginLeft: sp(v) }) },
+        { value: props.mt, getStyles: (v) => ({ marginTop: sp(v) }) },
+        { value: props.mb, getStyles: (v) => ({ marginBottom: sp(v) }) },
+        { value: props.mx, getStyles: (v) => ({ marginLeft: sp(v), marginRight: sp(v) }) },
+        { value: props.my, getStyles: (v) => ({ marginTop: sp(v), marginBottom: sp(v) }) },
+    ]);
 };
 
 /**
  * Gera os estilos de borda arredondada.
  */
 export const getRadiusStyles = (theme: Theme, props: RadiusProps): CSSObject => {
-    if (props.circle) return { borderRadius: '50px' };
+    if (props.circle) return { borderRadius: '50%' };
     if (props.square) return { borderRadius: 0 };
     if (props.radius !== undefined) {
         return { borderRadius: typeof props.radius === 'number' ? props.radius : theme.shape.borderRadius };
@@ -86,11 +127,11 @@ export const getRadiusStyles = (theme: Theme, props: RadiusProps): CSSObject => 
 /**
  * Gera os estilos de dimensão (altura/largura).
  */
-export const getSizeStyles = (_theme: Theme, props: SizeProps): CSSObject => {
-    return {
-        ...(props.height !== undefined && { height: props.height }),
-        ...(props.width !== undefined && { width: props.width }),
-    };
+export const getSizeStyles = (theme: Theme, props: SizeProps): CSSObject => {
+    return applyResponsiveStyles(theme, [
+        { value: props.height, getStyles: (v) => ({ height: v }) },
+        { value: props.width, getStyles: (v) => ({ width: v }) },
+    ]);
 };
 
 /**
@@ -99,8 +140,8 @@ export const getSizeStyles = (_theme: Theme, props: SizeProps): CSSObject => {
 export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
     const isFlex =
         props.displayFlex !== undefined ||
-        props.row ||
-        props.column ||
+        props.row !== undefined ||
+        props.column !== undefined ||
         props.center ||
         props.between ||
         props.around ||
@@ -109,12 +150,23 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         props.alignItems ||
         props.gap !== undefined;
 
+    let flexDirectionValue: any = undefined;
+    if (isFlex) {
+        if (typeof props.row === 'string') {
+            flexDirectionValue = { xs: 'column', [props.row]: 'row' };
+        } else if (typeof props.column === 'string') {
+            flexDirectionValue = { xs: 'row', [props.column]: 'column' };
+        } else {
+            flexDirectionValue = (props.column || props.displayFlex === 'column') ? 'column' : 'row';
+        }
+    }
+
     return {
-        ...(isFlex && {
-            display: 'flex',
-            flexDirection: (props.column || props.displayFlex === 'column') ? 'column' : 'row'
-        }),
-        ...(props.gap !== undefined && { gap: typeof props.gap === 'number' ? theme.spacing(props.gap) : props.gap }),
+        ...(isFlex && { display: 'flex' }),
+        ...applyResponsiveStyles(theme, [
+            { value: flexDirectionValue, getStyles: (v) => ({ flexDirection: v }) },
+            { value: props.gap, getStyles: (v) => ({ gap: typeof v === 'number' ? theme.spacing(v) : v }) }
+        ]),
         ...(props.justifyContent && { justifyContent: 'center' }),
         ...(props.alignItems && { alignItems: 'center' }),
         ...((props.center || props.displayFlex === 'center') && {
@@ -182,7 +234,6 @@ export const getHoverStyles = (
             }),
         } : {
             boxShadow: theme.shadows[6],
-            backgroundColor: theme.palette.action.hover,
         },
     };
 };

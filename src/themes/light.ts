@@ -67,7 +67,7 @@ export const lightThemeConfig: ThemeOptions = {
     },
     text: {
       primary: '#000000',
-      secondary: '#666666',
+      secondary: '#475569',
       disabled: '#9e9e9e',
     },
     divider: '#e0e0e0',

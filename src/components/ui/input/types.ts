@@ -34,4 +34,7 @@ export interface Props extends Omit<TextFieldProps, ConflictingProps>, RadiusPro
 
     /** Aplica formatação automática do texto e define propriedades máximas de limite. */
     mask?: MaskType;
+
+    /** Se true, adiciona o texto "(Opcional)" ao lado do inputLabel. */
+    optional?: boolean;
 }

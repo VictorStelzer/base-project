@@ -14,4 +14,8 @@ export interface Props extends ButtonProps, SpacingProps, SizeProps, RadiusProps
     hover?: HoverProps;
     /** Transforma o texto do botão em maiúsculo */
     uppercase?: boolean;
+    /** Tamanho da fonte */
+    fontSize?: string | number;
+    /** Peso da fonte */
+    fontWeight?: string | number;
 }

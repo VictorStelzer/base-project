@@ -6,9 +6,9 @@ import { Box } from "@/components";
 
 import { Container as ContainerMUI } from "@mui/material";
 
-export const Container: React.FC<Props> = ({ children, ...props }) => {
+export const Container: React.FC<Props> = ({ children, sx, ...props }) => {
     return (
-        <Box {...props}>
+        <Box {...props} p px={1}>
             <ContainerMUI maxWidth="xl" sx={{ height: '100%' }}>
                 <Box
                     displayFlex
@@ -22,6 +22,7 @@ export const Container: React.FC<Props> = ({ children, ...props }) => {
                     justifyContent={props.justifyContent}
                     alignItems={props.alignItems}
                     gap={props.gap}
+                    sx={sx}
                 >
                     {children}
                 </Box>

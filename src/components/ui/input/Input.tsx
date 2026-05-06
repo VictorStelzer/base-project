@@ -18,8 +18,8 @@ const StyledTextField = styled(TextField, {
     shouldForwardProp: (prop) => ![...RADIUS_PROPS, 'bgcolor', 'paper', 'customHeight'].includes(prop as string)
 })<any>(({ theme, ...props }) => {
     const bgColor = props.paper ? theme.palette.background.paper :
-                    props.bgcolor === true ? theme.palette.background.default :
-                    props.bgcolor ? getColor(theme, props.bgcolor) : undefined;
+        props.bgcolor === true ? theme.palette.background.default :
+            props.bgcolor ? getColor(theme, props.bgcolor) : undefined;
 
     return {
         ...(props.customHeight && {
@@ -43,16 +43,17 @@ export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>(({
     mask,
     bgcolor,
     paper,
-    radius,
+    radius = 12,
     circle,
     square,
     width,
-    height,
+    height = 45,
     p, pr, pl, pt, pb, px, py,
     m, ml, mr, mt, mb, mx, my,
     onChange,
     type,
     required,
+    optional,
     error,
     helperText,
     ...props
@@ -100,19 +101,19 @@ export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>(({
     const finalHelperText = hasError ? (errorText || helperText) : (helperText || (errorText !== undefined ? ' ' : undefined));
 
     return (
-        <Box 
-            width={width || (props.fullWidth ? '100%' : 'auto')} 
+        <Box
+            width={width || (props.fullWidth ? '100%' : 'auto')}
             p={p} pr={pr} pl={pl} pt={pt} pb={pb} px={px} py={py}
             m={m} ml={ml} mr={mr} mt={mt} mb={mb} mx={mx} my={my}
             column
         >
             {inputLabel && (
-                <Text variant="body2" fontWeight='bold' ml={0.5}>
-                    {inputLabel} {required && <span style={{ color: 'red' }}>*</span>}
+                <Text variant="body2" fontWeight='bold' ml={0.5} mb={0.8}>
+                    {inputLabel} {required && <span style={{ color: 'red' }}>*</span>} {optional && <span style={{ color: 'grey' }}> (Opcional) </span>}
                 </Text>
             )}
-            
-            <StyledTextField 
+
+            <StyledTextField
                 {...props}
                 ref={ref}
                 required={required}

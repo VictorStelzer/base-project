@@ -18,6 +18,8 @@ const StyledButton = styled(MuiButton, {
             ...LAYOUT_PROPS,
             ...SIZE_PROPS,
             'textColor',
+            'fontSize',
+            'fontWeight',
             'uppercase',
         ] as string[]).includes(prop as string),
 })<Props>(({ theme, ...props }) => {
@@ -40,6 +42,8 @@ const StyledButton = styled(MuiButton, {
 
     return {
         textTransform: props.uppercase ? 'uppercase' : 'none',
+        ...(props.fontSize && { fontSize: props.fontSize }),
+        ...(props.fontWeight && { fontWeight: props.fontWeight }),
         ...(props.textColor && { color: getColor(theme, props.textColor) }),
         ...getSizeStyles(theme, props),
         ...getFlexStyles(theme, props),

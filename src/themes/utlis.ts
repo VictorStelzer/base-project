@@ -13,7 +13,7 @@ export const getTheme = (mode: 'light' | 'dark', layoutType: 'auth' | 'unauth'):
     ...baseConfig,
     typography: { fontFamily: currentFontFamily },
     shape: {
-      borderRadius: 10,
+      borderRadius: 20,
     },
     breakpoints: {
       values: {

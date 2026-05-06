@@ -21,16 +21,23 @@ export const Icon: React.FC<Props> = ({ icon, color = 'primary.main', size = 24,
             bgcolor={backgroundColor}
             {...(bg && {
                 radius: props.radius ?? 12,
-                p: props.p ?? 0.5
+                p: props.p ?? 0.7
             })}
             {...props}
             sx={{
                 display: 'inline-flex',
-                '& svg, & .MuiSvgIcon-root': { color: color, fontSize: size },
+                '& svg, & .MuiSvgIcon-root': {
+                    color: color,
+                    fontSize: size,
+                    width: size,
+                    height: size
+                },
                 ...sx
             }}
         >
-            {icon}
+            {React.isValidElement(icon)
+                ? React.cloneElement(icon as React.ReactElement<any>, { size })
+                : icon}
         </Box>
     );
 };

@@ -3,22 +3,26 @@
  * Cada componente pode ter suas próprias extensões desses tipos base.
  */
 
+export type BreakpointKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ResponsiveProp<T> = T | Partial<Record<BreakpointKey, T>>;
+
+
 /** Props de espaçamento comuns a todos os componentes customizados. */
 export interface SpacingProps {
-    p?: boolean | number | string;
-    pr?: string | number;
-    pl?: string | number;
-    pt?: string | number;
-    pb?: string | number;
-    px?: string | number;
-    py?: string | number;
-    m?: string | number;
-    ml?: string | number;
-    mr?: string | number;
-    mt?: string | number;
-    mb?: string | number;
-    mx?: string | number;
-    my?: string | number;
+    p?: ResponsiveProp<boolean | number | string>;
+    pr?: ResponsiveProp<string | number>;
+    pl?: ResponsiveProp<string | number>;
+    pt?: ResponsiveProp<string | number>;
+    pb?: ResponsiveProp<string | number>;
+    px?: ResponsiveProp<string | number>;
+    py?: ResponsiveProp<string | number>;
+    m?: ResponsiveProp<string | number>;
+    ml?: ResponsiveProp<string | number>;
+    mr?: ResponsiveProp<string | number>;
+    mt?: ResponsiveProp<string | number>;
+    mb?: ResponsiveProp<string | number>;
+    mx?: ResponsiveProp<string | number>;
+    my?: ResponsiveProp<string | number>;
 }
 
 /** Props de arredondamento compartilhadas. */
@@ -30,15 +34,15 @@ export interface RadiusProps {
 
 /** Props de dimensão compartilhadas. */
 export interface SizeProps {
-    height?: string | number;
-    width?: string | number;
+    height?: ResponsiveProp<string | number>;
+    width?: ResponsiveProp<string | number>;
 }
 
 /** Props de layout flexbox e dimensões completas. */
 export interface FlexProps {
     displayFlex?: boolean | 'row' | 'column' | 'center';
-    row?: boolean;
-    column?: boolean;
+    row?: boolean | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    column?: boolean | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     center?: boolean;
     between?: boolean;
     around?: boolean;
@@ -46,7 +50,7 @@ export interface FlexProps {
     full?: boolean;
     justifyContent?: boolean;
     alignItems?: boolean;
-    gap?: number | string;
+    gap?: ResponsiveProp<number | string>;
 }
 
 /**

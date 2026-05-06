@@ -23,12 +23,12 @@ export const IconButton = styled(MuiIconButton as any, {
     // Resolve a cor principal
     const colorValue = props.color ? getColor(theme, props.color) : theme.palette.action.active;
     const resolvedColor = colorValue || theme.palette.primary.main;
-    
+
     // Determina a cor de fundo com base na prop 'bg'
-    const backgroundColor = typeof props.bg === 'string' 
+    const backgroundColor = typeof props.bg === 'string'
         ? getColor(theme, props.bg)
-        : props.bg === true 
-            ? alpha(resolvedColor, 0.1) 
+        : props.bg === true
+            ? alpha(resolvedColor, 0.1)
             : undefined;
 
     const hoverStyles = getHoverStyles(theme, props.hover);
@@ -37,28 +37,39 @@ export const IconButton = styled(MuiIconButton as any, {
         // Estilo base do botão
         ...(props.color && { color: resolvedColor }),
         ...(backgroundColor && { backgroundColor }),
-        
+
         // Se bg for ativado, aplica um padding padrão se não especificado, e ajusta o radius
         ...(props.bg && {
             borderRadius: props.circle ? '50%' : (typeof props.radius === 'number' ? props.radius : 12),
-            padding: props.p !== undefined 
-                ? (typeof props.p === 'number' ? theme.spacing(props.p) : (props.p === true ? '8px' : props.p)) 
-                : theme.spacing(0.5),
+            padding: props.p !== undefined
+                ? (typeof props.p === 'number' ? theme.spacing(props.p) : (props.p === true ? '8px' : props.p))
+                : theme.spacing(1),
         }),
 
         ...getSizeStyles(theme, props),
-        ...(props.size !== undefined && { fontSize: props.size }),
         ...getFlexStyles(theme, props),
         ...getSpacingStyles(theme, props),
         ...getRadiusStyles(theme, props),
-        '& .MuiSvgIcon-root': { fontSize: 'inherit' },
+        ...(props.size !== undefined ? {
+            '& svg, & .MuiSvgIcon-root': {
+                fontSize: props.size,
+                width: props.size,
+                height: props.size
+            }
+        } : {
+            '& svg, & .MuiSvgIcon-root': {
+                fontSize: 'inherit',
+                width: '1em',
+                height: '1em'
+            }
+        }),
         ...hoverStyles,
-        
+
         // Assegura que o hover mantenha o estilo se tiver bg, ou use a cor resolvida
         '&:hover': {
-            backgroundColor: backgroundColor 
-                ? typeof props.bg === 'string' 
-                    ? alpha(backgroundColor, 0.8) 
+            backgroundColor: backgroundColor
+                ? typeof props.bg === 'string'
+                    ? alpha(backgroundColor, 0.8)
                     : alpha(resolvedColor, 0.2)
                 : alpha(resolvedColor, theme.palette.action.hoverOpacity),
             ...(hoverStyles['&:hover'] as any)

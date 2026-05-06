@@ -20,7 +20,7 @@ export const BackButton: React.FC<Props> = ({ variant = 'text', label = 'Voltar'
     };
 
     return (
-        <Button {...props} variant={variant} onClick={handleClick} startIcon={<ArrowBackIcon />}>
+        <Button width='fit-content' fontWeight='bold' fontSize={20} {...props} variant={variant} onClick={handleClick} startIcon={<ArrowBackIcon />}>
             {label}
         </Button>
     );

@@ -1,21 +1,22 @@
 import React from 'react';
 
 import { IMAGES, HEADER } from '@/constants';
-import { Container, Image, Button, Box, TextButton } from '@/components'
 
+import { useNavigate } from 'react-router-dom';
+
+import { Container, Image, TextButton } from '@/components'
 export const Header: React.FC = () => {
-    return (
-        <Container row alignItems between height="11vh" width="100%" position={'sticky'}>
-            <Image onClick={() => { window.location.href = '/' }} src={IMAGES.site.logo} width={170} />
-            <Box row gap={4} alignItems>
-                <Box gap={4}>
-                    {HEADER.Home.map((link) => (
-                        <TextButton color="text.secondary" fontWeight={600} fontSize={14} hover={{ color: 'primary.main' }} href={link.href} key={link.label}>{link.label}</TextButton>
-                    ))}
-                </Box>
+    const navigate = useNavigate();
 
-                <Button circle>Entrar</Button>
-            </Box>
+    return (
+        <Container row alignItems between height="11vh" width="100%" position={'sticky'} top={0} zIndex={1100} bgcolor="background.default">
+            <Image onClick={() => { navigate('/') }} src={IMAGES.site.logo} width={170} style={{ cursor: 'pointer' }} />
+
+            {HEADER.Home.map((link, index) => (
+                <TextButton color="text.secondary" fontWeight={600} fontSize={13} hover={{ color: 'primary.main' }} href={link.href} key={index}>
+                    {link.label}
+                </TextButton>
+            ))}
         </Container>
     )
 }
