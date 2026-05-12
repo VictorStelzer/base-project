@@ -30,34 +30,41 @@ const StyledTextField = styled(TextField, {
         '& .MuiOutlinedInput-root, & .MuiFilledInput-root, & .MuiInput-root': {
             ...(bgColor && { backgroundColor: bgColor }),
             ...getRadiusStyles(theme, props),
+        },
+        '& .MuiFormHelperText-root': {
+            minHeight: '20px',
+            margin: theme.spacing(0.5, 0.5, 0, 0.5),
+            lineHeight: '1.2',
         }
     };
 });
 
-export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>(({
-    inputLabel,
-    errorText,
-    icon,
-    iconRight,
-    password,
-    mask,
-    bgcolor,
-    paper,
-    radius = 12,
-    circle,
-    square,
-    width,
-    height = 45,
-    p, pr, pl, pt, pb, px, py,
-    m, ml, mr, mt, mb, mx, my,
-    onChange,
-    type,
-    required,
-    optional,
-    error,
-    helperText,
-    ...props
-}, ref) => {
+export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>((allProps, ref) => {
+    const {
+        inputLabel,
+        errorText,
+        icon,
+        iconRight,
+        password,
+        mask,
+        bgcolor,
+        paper,
+        radius = 12,
+        circle,
+        square,
+        width,
+        height = 45,
+        p, pr, pl, pt, pb, px, py,
+        m, ml, mr, mt, mb, mx, my,
+        onChange,
+        type,
+        required,
+        optional,
+        error,
+        helperText,
+        ...props
+    } = allProps;
+
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePassword = () => setShowPassword(!showPassword);
 
@@ -96,9 +103,12 @@ export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>(({
         );
     }
 
+    // Verifica se a prop errorText foi passada no componente, mesmo que seu valor seja undefined
+    const isErrorTextDeclared = 'errorText' in allProps;
+
     // Controla a visibilidade do error logicamente para manter o layout intáctil
     const hasError = error !== undefined ? error : !!errorText;
-    const finalHelperText = hasError ? (errorText || helperText) : (helperText || (errorText !== undefined ? ' ' : undefined));
+    const finalHelperText = hasError ? (errorText || helperText) : (helperText || (isErrorTextDeclared ? ' ' : undefined));
 
     return (
         <Box
