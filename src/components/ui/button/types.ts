@@ -18,4 +18,6 @@ export interface Props extends ButtonProps, SpacingProps, SizeProps, RadiusProps
     fontSize?: string | number;
     /** Peso da fonte */
     fontWeight?: string | number;
+    /** Exibe um spinner de carregamento e desativa o botão */
+    loading?: boolean;
 }

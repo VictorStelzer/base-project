@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Props } from './types';
 
-import { Button as MuiButton } from '@mui/material';
+import { Button as MuiButton, CircularProgress } from '@mui/material';
 
 import { styled, CSSObject } from '@mui/material/styles';
 
@@ -53,6 +53,10 @@ const StyledButton = styled(MuiButton, {
     } as CSSObject;
 });
 
-export const Button: React.FC<Props> = ({ variant = 'contained', ...props }) => {
-    return <StyledButton variant={variant} {...props} />;
+export const Button: React.FC<Props> = ({ variant = 'contained', loading, children, disabled, startIcon, ...props }) => {
+    return (
+        <StyledButton variant={variant} disabled={loading || disabled} startIcon={loading ? null : startIcon}{...props}>
+            {loading ? <CircularProgress size={24} color="inherit" /> : children}
+        </StyledButton>
+    );
 };
