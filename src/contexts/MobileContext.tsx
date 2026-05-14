@@ -1,22 +1,17 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useMemo } from 'react';
 
-interface MobileContextData {
-  isMobile: boolean;
-  isTablet: boolean;
-}
+import type { MobileContextData } from '@/types';
 
-const MobileContext = createContext<MobileContextData>({} as MobileContextData);
+export const MobileContext = createContext<MobileContextData | undefined>(undefined);
 
 export const MobileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const theme = useTheme();
-  
-  // Usamos os breakpoints oficiais do seu tema MUI
+
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
-  // useMemo para evitar que o contexto mude a cada renderização da App
   const value = useMemo(() => ({ isMobile, isTablet }), [isMobile, isTablet]);
 
   return (
@@ -25,5 +20,3 @@ export const MobileProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     </MobileContext.Provider>
   );
 };
-
-export const useMobile = () => useContext(MobileContext);
