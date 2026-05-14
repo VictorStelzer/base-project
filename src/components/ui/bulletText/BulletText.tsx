@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Props } from './types';
+import { BulletTextProps } from './types';
 
 import { Text, Box } from '@/components';
 import { getColor } from '@/components/styles';
 
 import { useTheme } from '@mui/material/styles';
 
-export const BulletText: React.FC<Props> = ({ bullet = {}, color, size, children, ...textProps }) => {
+export const BulletText: React.FC<BulletTextProps> = ({ bullet = {}, color, size, children, ...textProps }) => {
     const theme = useTheme();
 
     const bulletColor = bullet.color ? getColor(theme, bullet.color) : (color ? getColor(theme, color) : theme.palette.text.primary);
@@ -17,7 +17,7 @@ export const BulletText: React.FC<Props> = ({ bullet = {}, color, size, children
     const gap = bullet.gap ?? 1;
 
     return (
-        <Box row gap={gap} alignItems='center'>
+        <Box row gap={gap} alignItems>
             <Box
                 width={bulletSize}
                 height={bulletSize}

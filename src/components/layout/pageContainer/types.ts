@@ -1,5 +1,5 @@
-import { Props as BoxProps } from '@/components/ui/box/types'
+import { BoxProps } from '@/components/ui/box/types'
 
-export interface Props extends BoxProps {
+export interface ContainerProps extends BoxProps {
     children?: React.ReactNode;
 }

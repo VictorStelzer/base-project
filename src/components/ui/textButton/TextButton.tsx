@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { TextButtonProps } from './types';
 
 import { Link as MuiLink } from '@mui/material';
 
@@ -18,7 +18,7 @@ const StyledLink = styled(MuiLink as any, {
             ...LAYOUT_PROPS,
             ...SIZE_PROPS,
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => ({
+})<TextButtonProps>(({ theme, ...props }) => ({
     cursor: 'pointer',
     ...getSizeStyles(theme, props),
     ...getFlexStyles(theme, props),
@@ -26,7 +26,7 @@ const StyledLink = styled(MuiLink as any, {
     ...getHoverStyles(theme, props.hover),
 }));
 
-export const TextButton: React.FC<Props> = ({ href, to, underline = 'none', onClick, ...props }) => {
+export const TextButton: React.FC<TextButtonProps> = ({ href, to, underline = 'none', onClick, ...props }) => {
     const navigate = useNavigate();
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

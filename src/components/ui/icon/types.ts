@@ -1,4 +1,4 @@
-import { Props as BoxProps } from "../box/types";
+import { BoxProps } from "@/components";
 
 
 /**
@@ -6,7 +6,7 @@ import { Props as BoxProps } from "../box/types";
  * Estende as propriedades do Box, permitindo customizações de layout e espaçamento,
  * mas omite 'color' para evitar conflitos com a cor do ícone.
  */
-export interface Props extends Omit<BoxProps, 'color'> {
+export interface IconProps extends Omit<BoxProps, 'color'> {
     /** 
      * O ícone que será renderizado dentro do componente. 
      * Pode ser um componente de ícone (ex: Lucide, MUI) ou um elemento SVG.

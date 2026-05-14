@@ -1,28 +1,15 @@
 import React from 'react';
-import { 
-    Accordion as MuiAccordion, 
-    AccordionSummary as MuiAccordionSummary, 
-    AccordionDetails as MuiAccordionDetails, 
-    Typography
-} from '@mui/material';
+import { Accordion as MuiAccordion, AccordionSummary as MuiAccordionSummary, AccordionDetails as MuiAccordionDetails, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { Props } from './types';
-import { 
-    getSpacingStyles, 
-    getRadiusStyles, 
-    getSizeStyles, 
-    getColor, 
-    SPACING_PROPS, 
-    RADIUS_PROPS, 
-    SIZE_PROPS 
-} from '@/components/styles';
+import { AccordionProps } from './types';
+import { getSpacingStyles, getRadiusStyles, getSizeStyles, getColor, SPACING_PROPS, RADIUS_PROPS, SIZE_PROPS } from '@/components/styles';
 
 const StyledAccordion = styled(MuiAccordion, {
-    shouldForwardProp: (prop) => 
-        !([...SPACING_PROPS, ...RADIUS_PROPS, ...SIZE_PROPS, 'bgcolor', 'radius', 'divider'] as string[]).includes(prop as string)
-})<Partial<Props>>(({ theme, ...props }) => ({
+    shouldForwardProp: (prop) =>
+        !([...SPACING_PROPS, ...RADIUS_PROPS, ...SIZE_PROPS, 'bgcolor', 'radius', 'divider', 'expandMarginReset'] as string[]).includes(prop as string)
+})<Partial<AccordionProps> & { expandMarginReset?: boolean }>(({ theme, ...props }) => ({
     backgroundColor: props.bgcolor ? getColor(theme, props.bgcolor) : theme.palette.background.paper,
     boxShadow: theme.shadows[1],
     '&:before': {
@@ -34,7 +21,7 @@ const StyledAccordion = styled(MuiAccordion, {
     overflow: 'hidden',
     transition: 'all 0.3s ease-in-out',
     '&.Mui-expanded': {
-        margin: props.m !== undefined ? undefined : 0, // Remove o crescimento padrão do MUI
+        ...(props.expandMarginReset ? { margin: 0 } : {}),
     },
 }));
 
@@ -55,23 +42,31 @@ const StyledDetails = styled(MuiAccordionDetails, {
     borderTop: divider ? `1px solid ${theme.palette.divider}` : 'none',
 }));
 
-export const Accordion: React.FC<Props> = ({ 
-    title, 
-    children, 
-    titleColor, 
-    titleStyle, 
-    textColor, 
-    textStyle, 
-    icon, 
-    iconColor, 
+export const Accordion: React.FC<AccordionProps> = ({
+    title,
+    children,
+    titleColor,
+    titleStyle,
+    textColor,
+    textStyle,
+    icon,
+    iconColor,
     iconPosition = 'end',
     divider = false,
-    ...props 
+    m,
+    radius,
+    ...props
 }) => {
     const theme = useTheme();
 
     return (
-        <StyledAccordion disableGutters {...props} radius m={1}>
+        <StyledAccordion
+            disableGutters
+            {...props}
+            m={m ?? 1}
+            radius={radius ?? true}
+            expandMarginReset={m === undefined}
+        >
             <StyledSummary
                 expandIcon={icon || <ExpandMoreIcon sx={{ color: iconColor ? getColor(theme, iconColor) : undefined }} />}
                 sx={{
@@ -83,13 +78,13 @@ export const Accordion: React.FC<Props> = ({
                 }}
             >
                 {typeof title === 'string' ? (
-                    <Typography 
-                        variant="subtitle1" 
+                    <Typography
+                        variant="subtitle1"
                         fontWeight="600"
                         {...titleStyle}
-                        sx={{ 
+                        sx={{
                             color: titleColor ? getColor(theme, titleColor) : 'text.primary',
-                            ...titleStyle?.sx 
+                            ...titleStyle?.sx
                         }}
                     >
                         {title}
@@ -100,13 +95,13 @@ export const Accordion: React.FC<Props> = ({
             </StyledSummary>
             <StyledDetails divider={divider}>
                 {typeof children === 'string' ? (
-                    <Typography 
-                        variant="body2" 
+                    <Typography
+                        variant="body2"
                         {...textStyle}
-                        sx={{ 
+                        sx={{
                             color: textColor ? getColor(theme, textColor) : 'text.secondary',
                             lineHeight: 1.6,
-                            ...textStyle?.sx 
+                            ...textStyle?.sx
                         }}
                     >
                         {children}

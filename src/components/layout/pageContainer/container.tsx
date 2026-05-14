@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Props } from "./types";
-
 import { Box } from "@/components";
+
+import { ContainerProps } from "./types";
 
 import { Container as ContainerMUI } from "@mui/material";
 
-export const Container: React.FC<Props> = ({ children, sx, ...props }) => {
+export const Container: React.FC<ContainerProps> = ({ children, sx, ...props }) => {
     return (
         <Box {...props} p px={1}>
             <ContainerMUI maxWidth="xl" sx={{ height: '100%' }}>

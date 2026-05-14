@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { TextProps } from './types';
 
 import { Typography } from '@mui/material';
 
@@ -15,7 +15,7 @@ export const Text = styled(Typography as any, {
             ...SIZE_PROPS,
             'truncate', 'gradient'
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => {
+})<TextProps>(({ theme, ...props }) => {
 
     // Lógica de Gradiente no Texto
     const gradientStyles: CSSObject = props.gradient ? {
@@ -43,4 +43,4 @@ export const Text = styled(Typography as any, {
         // --- Efeito de Gradiente ---
         ...gradientStyles
     } as CSSObject;
-}) as React.FC<Props>;
+}) as React.FC<TextProps>;

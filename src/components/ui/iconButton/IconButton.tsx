@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from './types';
+import { IconButtonProps } from './types';
 import { IconButton as MuiIconButton } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import {
@@ -19,7 +19,7 @@ export const IconButton = styled(MuiIconButton as any, {
             'circle',
             'radius'
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => {
+})<IconButtonProps>(({ theme, ...props }) => {
     // Resolve a cor principal
     const colorValue = props.color ? getColor(theme, props.color) : theme.palette.action.active;
     const resolvedColor = colorValue || theme.palette.primary.main;
@@ -75,4 +75,4 @@ export const IconButton = styled(MuiIconButton as any, {
             ...(hoverStyles['&:hover'] as any)
         }
     };
-}) as React.FC<Props>;
+}) as React.FC<IconButtonProps>;

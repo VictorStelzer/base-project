@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { PaperProps } from './types';
 
 import { Paper as MuiPaper } from '@mui/material';
 
@@ -18,7 +18,7 @@ export const Paper = styled(MuiPaper, {
             ...HOVER_PROPS,
             'height', 'width', 'bgcolor', 'glass',
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => {
+})<PaperProps>(({ theme, ...props }) => {
     return {
         // --- Layout Flexbox ---
         ...getFlexStyles(theme, props),
@@ -39,4 +39,4 @@ export const Paper = styled(MuiPaper, {
         ...getRadiusStyles(theme, props),
         ...getHoverStyles(theme, props.hover),
     } as CSSObject;
-}) as React.FC<Props>;
+}) as React.FC<PaperProps>;

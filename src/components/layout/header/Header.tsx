@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
     const navigate = useNavigate();
 
     return (
-        <Container row alignItems between height="11vh" width="100%" position={'sticky'} top={0} zIndex={1100} bgcolor="background.default">
+        <Container row alignItems between height="10vh" width="100%" position={'sticky'} top={0} zIndex={1100} bgcolor="background.default">
             <Image onClick={() => { navigate('/') }} src={IMAGES.site.logo} width={170} style={{ cursor: 'pointer' }} />
 
             {HEADER.Home.map((link, index) => (

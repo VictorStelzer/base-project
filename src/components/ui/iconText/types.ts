@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Props as TextProps } from '../text/types';
+import { TextProps } from '@/components';
 
 export interface IconSettings {
     icon: ReactNode;
@@ -10,7 +10,7 @@ export interface IconSettings {
     position?: 'left' | 'right' | 'top' | 'bottom';
 }
 
-export interface Props extends Omit<TextProps, 'color'> {
+export interface IconTextProps extends Omit<TextProps, 'color'> {
     /** Cor geral (aplica-se ao ícone e ao texto a menos que sobrescrita na prop icon) */
     color?: string; 
     /** Tamanho geral do texto e base do ícone */

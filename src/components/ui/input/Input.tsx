@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 
-import { Props } from './types';
+import { InputProps } from './types';
 
 import { TextField, InputAdornment, IconButton as MuiIconButton } from '@mui/material';
 
@@ -39,7 +39,7 @@ const StyledTextField = styled(TextField, {
     };
 });
 
-export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>((allProps, ref) => {
+export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allProps, ref) {
     const {
         inputLabel,
         errorText,
@@ -151,3 +151,5 @@ export const Input: React.FC<Props> = forwardRef<HTMLDivElement, Props>((allProp
         </Box>
     );
 });
+
+Input.displayName = 'Input';

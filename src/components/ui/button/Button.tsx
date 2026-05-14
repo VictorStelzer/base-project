@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { ButtonProps } from './types';
 
 import { Button as MuiButton, CircularProgress } from '@mui/material';
 
@@ -22,7 +22,7 @@ const StyledButton = styled(MuiButton, {
             'fontWeight',
             'uppercase',
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => {
+})<ButtonProps>(({ theme, ...props }) => {
     // Button tem hover próprio: color = bgcolor, textColor = color
     const hoverStyles: CSSObject = props.hover ? {
         transition: 'all 0.2s ease-in-out',
@@ -53,7 +53,7 @@ const StyledButton = styled(MuiButton, {
     } as CSSObject;
 });
 
-export const Button: React.FC<Props> = ({ variant = 'contained', loading, children, disabled, startIcon, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ variant = 'contained', loading, children, disabled, startIcon, ...props }) => {
     return (
         <StyledButton variant={variant} disabled={loading || disabled} startIcon={loading ? null : startIcon}{...props}>
             {loading ? <CircularProgress size={24} color="inherit" /> : children}

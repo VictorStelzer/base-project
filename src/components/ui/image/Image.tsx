@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box } from '@/components/ui/box';
-import { Props } from './types';
+import { Box } from '@/components';
+import { ImageProps } from './types';
 
-export const Image = React.forwardRef<HTMLImageElement, Props>(({ objectFit = 'cover', src, alt, ...props }, ref) => {
+export const Image = React.forwardRef<HTMLImageElement, ImageProps>(({ objectFit = 'cover', src, alt, ...props }, ref) => {
     
     // Se a pessoa ativou o "zoom", precisamos obrigatoriamente de um wrapper
     // pois o CSS não permite dar scale em um <img> sem que ele cresça para fora de seus limites.

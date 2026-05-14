@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { ChipProps } from './types';
 
 import { Chip as MuiChip } from '@mui/material';
 
@@ -16,7 +16,7 @@ export const Chip = styled(MuiChip as any, {
             ...SIZE_PROPS,
             'textColor'
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => {
+})<ChipProps>(({ theme, ...props }) => {
 
     return {
         // --- Espaçamento (Padding/Margin) ---
@@ -31,4 +31,4 @@ export const Chip = styled(MuiChip as any, {
         // --- Hover ---
         ...getHoverStyles(theme, props.hover),
     } as CSSObject;
-}) as React.FC<Props>;
+}) as React.FC<ChipProps>;

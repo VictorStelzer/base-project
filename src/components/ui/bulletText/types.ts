@@ -1,4 +1,4 @@
-import { Props as TextProps } from '../text/types';
+import { TextProps } from '@/components';
 
 export interface BulletSettings {
     color?: string;
@@ -9,11 +9,11 @@ export interface BulletSettings {
 /**
  * Propriedades do componente BulletText, mesclando MUI com as nossas customizações.
  */
-export interface Props extends Omit<TextProps, 'color'> {
+export interface BulletTextProps extends Omit<TextProps, 'color'> {
     /** Cor geral (aplica-se ao bullet e ao texto a menos que sobrescrita na prop bullet) */
-    color?: string; 
+    color?: string;
     /** Tamanho geral do texto */
-    size?: string | number; 
+    size?: string | number;
     /** Configurações específicas do bullet */
     bullet?: BulletSettings;
 }

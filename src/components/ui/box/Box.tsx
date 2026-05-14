@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { BoxProps } from './types';
 
 import { Box as MuiBox } from '@mui/material';
 
@@ -19,7 +19,7 @@ export const Box = styled(MuiBox as any, {
             ...SIZE_PROPS,
             'shadow', 'shadowSecondary', 'shadowColor', 'paper', 'bgcolor',
         ] as string[]).includes(prop as string),
-})<Props>(({ theme, ...props }) => {
+})<BoxProps>(({ theme, ...props }) => {
     // Box agora usa o getHoverStyles global que suporta shadowColor
 
     return {
@@ -53,4 +53,4 @@ export const Box = styled(MuiBox as any, {
 
         ...getHoverStyles(theme, props.hover)
     } as CSSObject;
-}) as React.FC<Props>;
+}) as React.FC<BoxProps>;

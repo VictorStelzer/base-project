@@ -1,14 +1,8 @@
 import React, { SyntheticEvent } from 'react';
-import {
-    Snackbar as MuiSnackbar,
-    SnackbarCloseReason,
-    useTheme,
-    SnackbarOrigin
-} from '@mui/material';
+import { Snackbar as MuiSnackbar, SnackbarCloseReason, useTheme, SnackbarOrigin } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, IconButton, Text } from '@/components';
-import { SnackbarProps } from './types';
-import { getColor } from '@/components/styles/utils';
+import { Box, IconButton, Text, SnackbarProps } from '@/components';
+import { getColor } from '@/components/styles';
 
 export const Snackbar: React.FC<SnackbarProps> = ({
     message,

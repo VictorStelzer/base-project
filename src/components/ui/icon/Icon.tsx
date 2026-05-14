@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from "./types";
+import { IconProps } from "./types";
 
 import { Box } from "@/components";
 
@@ -9,7 +9,7 @@ import { getColor } from "@/components/styles";
 import { useTheme, alpha } from '@mui/material/styles';
 
 
-export const Icon: React.FC<Props> = ({ icon, color = 'primary.main', size = 24, bg, sx, ...props }) => {
+export const Icon: React.FC<IconProps> = ({ icon, color = 'primary.main', size = 24, bg, sx, ...props }) => {
     const theme = useTheme();
 
     const resolvedColor = getColor(theme, color) || theme.palette.primary.main;
@@ -41,6 +41,3 @@ export const Icon: React.FC<Props> = ({ icon, color = 'primary.main', size = 24,
         </Box>
     );
 };
-
-
-export default Icon;

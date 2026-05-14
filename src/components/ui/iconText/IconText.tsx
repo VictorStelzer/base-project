@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Props } from './types';
+import { IconTextProps } from './types';
 
 import { Text, Box } from '@/components';
 
@@ -8,7 +8,7 @@ import { getColor } from '@/components/styles';
 
 import { useTheme } from '@mui/material/styles';
 
-export const IconText: React.FC<Props> = ({ icon, color, size, children, ...textProps }) => {
+export const IconText: React.FC<IconTextProps> = ({ icon, color, size, children, ...textProps }) => {
     const theme = useTheme();
 
     const iconColor = icon.color ? getColor(theme, icon.color) : (color ? getColor(theme, color) : theme.palette.primary.main);

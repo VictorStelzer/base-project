@@ -7,10 +7,9 @@ type ConflictingProps = typeof SPACING_PROPS[number] | typeof SIZE_PROPS[number]
 
 export type MaskType = 'cpf' | 'cnpj' | 'cpfCnpj' | 'phone' | 'cardNumber' | 'expiryDate' | 'cep' | 'currency';
 
-export interface Props extends Omit<TextFieldProps, ConflictingProps>, RadiusProps, SizeProps, SpacingProps {
+export interface InputProps extends Omit<TextFieldProps, ConflictingProps>, RadiusProps, SizeProps, SpacingProps {
     /** Exibe o label acima do input (ao invés do label flutuante interno do TextField). */
     inputLabel?: string;
-
     /** 
      * Texto de erro exibido abaixo do input. 
      * Se essa prop for passada (mesmo sendo undefined), o espaço dele será reservado no layout.
