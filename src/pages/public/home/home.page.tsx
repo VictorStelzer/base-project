@@ -2,12 +2,10 @@ import React from 'react'
 
 import { Container } from '@/components'
 
-const Home: React.FC = () => {
+export const HomePage: React.FC = () => {
     return (
         <Container>
 
         </Container>
     )
 }
-
-export default Home
