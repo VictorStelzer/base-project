@@ -1,8 +1,11 @@
-import '../types';
+/** Garante execução do augmentation de `@mui/material/styles` (ex.: `palette.tertiary`). */
+import '@/types';
+
 import { createTheme, Theme } from '@mui/material/styles';
-import { lightThemeConfig } from './light';
+
 import { darkThemeConfig } from './dark';
 import { fontInter, fontRoboto } from './fonts';
+import { lightThemeConfig } from './light';
 
 export const getTheme = (mode: 'light' | 'dark', layoutType: 'auth' | 'unauth'): Theme => {
   const isLight = mode === 'light';
@@ -23,6 +26,6 @@ export const getTheme = (mode: 'light' | 'dark', layoutType: 'auth' | 'unauth'):
         lg: 1200,
         xl: 1280,
       },
-    }
-  })
+    },
+  });
 };

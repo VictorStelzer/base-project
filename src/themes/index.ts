@@ -1,4 +1,4 @@
-import { getTheme } from "./utlis";
+import { getTheme } from "./utils";
 
 export { getTheme };
 export const lightTheme = getTheme('light', 'unauth');
