@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ButtonProps } from './types';
 
-import { Button as MuiButton, CircularProgress } from '@mui/material';
+import { Button as MuiButton, CircularProgress, alpha } from '@mui/material';
 
 import { styled, CSSObject } from '@mui/material/styles';
 
@@ -21,6 +21,7 @@ const StyledButton = styled(MuiButton, {
             'fontSize',
             'fontWeight',
             'uppercase',
+            'glass',
         ] as string[]).includes(prop as string),
 })<ButtonProps>(({ theme, ...props }) => {
     // Button tem hover próprio: color = bgcolor, textColor = color
@@ -49,6 +50,12 @@ const StyledButton = styled(MuiButton, {
         ...getFlexStyles(theme, props),
         ...getSpacingStyles(theme, props),
         ...getRadiusStyles(theme, props),
+        ...(props.glass && {
+            backgroundColor: theme.palette.mode === 'dark' ? alpha('#000', 0.2) : alpha('#fff', 0.2),
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#fff', 0.1) : alpha('#000', 0.1)}`
+        }),
         ...hoverStyles
     } as CSSObject;
 });

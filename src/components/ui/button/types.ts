@@ -20,4 +20,6 @@ export interface ButtonProps extends MuiButtonProps, SpacingProps, SizeProps, Ra
     fontWeight?: string | number;
     /** Exibe um spinner de carregamento e desativa o botão */
     loading?: boolean;
+    /** Aplica um efeito glass ao botão */
+    glass?: boolean;
 }
