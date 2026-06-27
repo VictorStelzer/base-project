@@ -25,3 +25,12 @@ export const LAYOUT_PROPS = [
 export const HOVER_PROPS = ['hover'] as const;
 
 export const SIZE_PROPS = ['height', 'width'] as const;
+
+export const POSITION_PROPS = [
+    'position', 'top', 'left', 'right', 'bottom', 'zIndex'
+] as const;
+
+export const TYPOGRAPHY_PROPS = [
+    'fontSize', 'fontWeight', 'textAlign', 'letterSpacing', 'lineHeight'
+] as const;
+

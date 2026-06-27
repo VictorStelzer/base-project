@@ -2,7 +2,7 @@ import { Theme } from '@mui/material';
 
 import { CSSObject, alpha } from '@mui/material/styles';
 
-import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey } from './types';
+import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey, PositionStyleProps, TypographyStyleProps } from './types';
 
 /**
  * Helper para agrupar e mesclar estilos responsivos (objetos { xs, sm, md, lg, xl })
@@ -165,10 +165,10 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         ...(isFlex && { display: 'flex' }),
         ...applyResponsiveStyles(theme, [
             { value: flexDirectionValue, getStyles: (v) => ({ flexDirection: v }) },
-            { value: props.gap, getStyles: (v) => ({ gap: typeof v === 'number' ? theme.spacing(v) : v }) }
+            { value: props.gap, getStyles: (v) => ({ gap: typeof v === 'number' ? theme.spacing(v) : v }) },
+            { value: props.justifyContent, getStyles: (v) => (v !== undefined && v !== false) ? { justifyContent: v === true ? 'center' : v } : {} },
+            { value: props.alignItems, getStyles: (v) => (v !== undefined && v !== false) ? { alignItems: v === true ? 'center' : v } : {} }
         ]),
-        ...(props.justifyContent && { justifyContent: 'center' }),
-        ...(props.alignItems && { alignItems: 'center' }),
         ...((props.center || props.displayFlex === 'center') && {
             justifyContent: 'center',
             alignItems: 'center'
@@ -237,3 +237,31 @@ export const getHoverStyles = (
         },
     };
 };
+
+/**
+ * Gera os estilos de posicionamento.
+ */
+export const getPositionStyles = (theme: Theme, props: PositionStyleProps): CSSObject => {
+    return applyResponsiveStyles(theme, [
+        { value: props.position, getStyles: (v) => ({ position: v }) },
+        { value: props.top, getStyles: (v) => ({ top: v }) },
+        { value: props.left, getStyles: (v) => ({ left: v }) },
+        { value: props.right, getStyles: (v) => ({ right: v }) },
+        { value: props.bottom, getStyles: (v) => ({ bottom: v }) },
+        { value: props.zIndex, getStyles: (v) => ({ zIndex: v }) },
+    ]);
+};
+
+/**
+ * Gera os estilos de tipografia.
+ */
+export const getTypographyStyles = (theme: Theme, props: TypographyStyleProps): CSSObject => {
+    return applyResponsiveStyles(theme, [
+        { value: props.fontSize, getStyles: (v) => ({ fontSize: v }) },
+        { value: props.fontWeight, getStyles: (v) => ({ fontWeight: v }) },
+        { value: props.textAlign, getStyles: (v) => ({ textAlign: v }) },
+        { value: props.letterSpacing, getStyles: (v) => ({ letterSpacing: v }) },
+        { value: props.lineHeight, getStyles: (v) => ({ lineHeight: v }) },
+    ]);
+};
+

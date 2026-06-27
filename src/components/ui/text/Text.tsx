@@ -6,13 +6,14 @@ import { Typography } from '@mui/material';
 
 import { styled, CSSObject } from '@mui/material/styles';
 
-import { getColor, getSpacingStyles, getSizeStyles, SPACING_PROPS, SIZE_PROPS } from '@/components/styles';
+import { getColor, getSpacingStyles, getSizeStyles, getTypographyStyles, SPACING_PROPS, SIZE_PROPS, TYPOGRAPHY_PROPS } from '@/components/styles';
 
 export const Text = styled(Typography as any, {
     shouldForwardProp: (prop) =>
         !([
             ...SPACING_PROPS,
             ...SIZE_PROPS,
+            ...TYPOGRAPHY_PROPS,
             'truncate', 'gradient'
         ] as string[]).includes(prop as string),
 })<TextProps>(({ theme, ...props }) => {
@@ -32,6 +33,9 @@ export const Text = styled(Typography as any, {
         // --- Espaçamento e Dimensões ---
         ...getSpacingStyles(theme, props),
         ...getSizeStyles(theme, props),
+
+        // --- Tipografia ---
+        ...getTypographyStyles(theme, props),
 
         // --- Truncamento de Múltiplas Linhas (Line Clamp) ---
         ...(props.truncate && {

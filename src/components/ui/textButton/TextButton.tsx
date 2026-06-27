@@ -8,7 +8,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 
-import { getSpacingStyles, getHoverStyles, getFlexStyles, getSizeStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS } from '@/components/styles';
+import { getSpacingStyles, getHoverStyles, getFlexStyles, getSizeStyles, getTypographyStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS, TYPOGRAPHY_PROPS } from '@/components/styles';
 
 const StyledLink = styled(MuiLink as any, {
     shouldForwardProp: (prop) =>
@@ -17,12 +17,14 @@ const StyledLink = styled(MuiLink as any, {
             ...HOVER_PROPS,
             ...LAYOUT_PROPS,
             ...SIZE_PROPS,
+            ...TYPOGRAPHY_PROPS,
         ] as string[]).includes(prop as string),
 })<TextButtonProps>(({ theme, ...props }) => ({
     cursor: 'pointer',
     ...getSizeStyles(theme, props),
     ...getFlexStyles(theme, props),
     ...getSpacingStyles(theme, props),
+    ...getTypographyStyles(theme, props),
     ...getHoverStyles(theme, props.hover),
 }));
 

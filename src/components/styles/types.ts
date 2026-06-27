@@ -48,8 +48,8 @@ export interface FlexProps {
     around?: boolean;
     evenly?: boolean;
     full?: boolean;
-    justifyContent?: boolean;
-    alignItems?: boolean;
+    justifyContent?: ResponsiveProp<boolean | "center" | "space-between" | "space-around" | "space-evenly" | "flex-start" | "flex-end">;
+    alignItems?: ResponsiveProp<boolean | "center" | "space-between" | "space-around" | "space-evenly" | "flex-start" | "flex-end">;
     gap?: ResponsiveProp<number | string>;
 }
 
@@ -69,4 +69,23 @@ export interface BaseHoverProps {
     scale?: number;
     zoom?: number;
     opacity?: number;
+}
+
+/** Props de posicionamento comuns. */
+export interface PositionStyleProps {
+    position?: ResponsiveProp<'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'>;
+    top?: ResponsiveProp<string | number>;
+    left?: ResponsiveProp<string | number>;
+    right?: ResponsiveProp<string | number>;
+    bottom?: ResponsiveProp<string | number>;
+    zIndex?: ResponsiveProp<number>;
+}
+
+/** Props de tipografia comuns. */
+export interface TypographyStyleProps {
+    fontSize?: ResponsiveProp<string | number>;
+    fontWeight?: ResponsiveProp<string | number>;
+    textAlign?: ResponsiveProp<'left' | 'center' | 'right' | 'justify' | 'inherit'>;
+    letterSpacing?: ResponsiveProp<string | number>;
+    lineHeight?: ResponsiveProp<string | number>;
 }

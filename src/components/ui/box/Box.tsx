@@ -7,7 +7,7 @@ import { Box as MuiBox } from '@mui/material';
 import { styled, CSSObject } from '@mui/material/styles';
 
 import {
-    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, getHoverStyles, applyColorToShadow, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS
+    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, getHoverStyles, getPositionStyles, applyColorToShadow, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS, POSITION_PROPS
 } from '@/components/styles';
 
 export const Box = styled(MuiBox as any, {
@@ -17,12 +17,16 @@ export const Box = styled(MuiBox as any, {
             ...SPACING_PROPS,
             ...HOVER_PROPS,
             ...SIZE_PROPS,
+            ...POSITION_PROPS,
             'shadow', 'shadowSecondary', 'shadowColor', 'paper', 'bgcolor',
         ] as string[]).includes(prop as string),
 })<BoxProps>(({ theme, ...props }) => {
     // Box agora usa o getHoverStyles global que suporta shadowColor
 
     return {
+        // --- Position ---
+        ...getPositionStyles(theme, props),
+
         // --- Layout Flexbox ---
         ...getFlexStyles(theme, props),
 

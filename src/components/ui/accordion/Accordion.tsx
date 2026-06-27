@@ -80,9 +80,9 @@ export const Accordion: React.FC<AccordionProps> = ({
                 {typeof title === 'string' ? (
                     <Typography
                         variant="subtitle1"
-                        fontWeight="600"
                         {...titleStyle}
                         sx={{
+                            fontWeight: '600',
                             color: titleColor ? getColor(theme, titleColor) : 'text.primary',
                             ...titleStyle?.sx
                         }}
