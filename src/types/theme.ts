@@ -1,11 +1,14 @@
 import { ReactNode } from 'react';
 import '@mui/material/styles';
 
+export type ThemeMode = 'light' | 'dark';
+export type LayoutType = 'auth' | 'unauth';
+
 export interface ThemeContextData {
-  mode: 'light' | 'dark';
+  mode: ThemeMode;
   toggleTheme: () => void;
-  layoutType: 'auth' | 'unauth';
-  setLayoutType: (layout: 'auth' | 'unauth') => void;
+  layoutType: LayoutType;
+  setLayoutType: (layout: LayoutType) => void;
 }
 
 export interface ThemeProviderProps {

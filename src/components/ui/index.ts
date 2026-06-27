@@ -19,3 +19,4 @@ export * from './Accordion'
 
 export * from './Image'
 export * from './Icon'
+export * from './ToggleTheme'

@@ -4,7 +4,7 @@ import { IMAGES, HEADER } from '@/constants';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Container, Image, TextButton } from '@/components'
+import { Container, Image, TextButton, ToggleTheme } from '@/components'
 export const Header: React.FC = () => {
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ export const Header: React.FC = () => {
                     {link.label}
                 </TextButton>
             ))}
+            <ToggleTheme />
         </Container>
     )
 }
