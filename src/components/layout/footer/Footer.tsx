@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
 
             <Divider color="grey.700" />
 
-            <Text textAlign="center" fontSize={12} color="grey.600" py={4}>
+            <Text textAlign="center" fontSize={12} color="textDisabled" py={4}>
                 © Todos os direitos reservados.
             </Text>
         </Container>
