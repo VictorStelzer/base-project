@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { NotificationContext } from '@/contexts/NotificationContext';
-import { SnackbarProps } from '@/components/feedback/snackbar/types';
+import { SnackbarProps } from '@/components';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { ErrorOutlined } from '@mui/icons-material';
 
 export const useNotification = () => {
     const context = useContext(NotificationContext);
@@ -25,7 +25,7 @@ export const useNotification = () => {
             message,
             color: 'error.main',
             close: true,
-            icon: <ErrorOutlineIcon />
+            icon: <ErrorOutlined />
         });
     };
 

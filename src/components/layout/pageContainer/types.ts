@@ -1,4 +1,4 @@
-import { BoxProps } from '@/components/ui/box/types'
+import { BoxProps } from '@/components';
 
 export interface ContainerProps extends BoxProps {
     children?: React.ReactNode;

@@ -1,7 +1,6 @@
 import React, { createContext, useState, useCallback, ReactNode } from 'react';
 import { SnackbarCloseReason } from '@mui/material';
-import { Snackbar } from '@/components';
-import { SnackbarProps } from '@/components/feedback/snackbar/types';
+import { Snackbar, SnackbarProps } from '@/components';
 
 export interface NotificationContextData {
     showSnackbar: (options: SnackbarProps) => void;
