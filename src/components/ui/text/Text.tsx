@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 
 import { styled, CSSObject } from '@mui/material/styles';
 
-import { getColor, getSpacingStyles, getSizeStyles, getTypographyStyles, SPACING_PROPS, SIZE_PROPS, TYPOGRAPHY_PROPS } from '@/components/styles';
+import { getColor, getSpacingStyles, getSizeStyles, getTypographyStyles, SPACING_PROPS, SIZE_PROPS, TYPOGRAPHY_PROPS, VISIBILITY_PROPS, getVisibilityStyles } from '@/components/styles';
 
 export const Text = styled(Typography as any, {
     shouldForwardProp: (prop) =>
@@ -14,6 +14,7 @@ export const Text = styled(Typography as any, {
             ...SPACING_PROPS,
             ...SIZE_PROPS,
             ...TYPOGRAPHY_PROPS,
+            ...VISIBILITY_PROPS,
             'truncate', 'gradient'
         ] as string[]).includes(prop as string),
 })<TextProps>(({ theme, ...props }) => {
@@ -45,6 +46,7 @@ export const Text = styled(Typography as any, {
             WebkitLineClamp: props.truncate,
         }),
         // --- Efeito de Gradiente ---
-        ...gradientStyles
+        ...gradientStyles,
+        ...getVisibilityStyles(theme, props),
     } as CSSObject;
 }) as React.FC<TextProps>;

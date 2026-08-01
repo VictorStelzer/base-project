@@ -2,7 +2,7 @@ import { Theme } from '@mui/material';
 
 import { CSSObject, alpha } from '@mui/material/styles';
 
-import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey, PositionStyleProps, TypographyStyleProps } from './types';
+import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey, PositionStyleProps, TypographyStyleProps, VisibilityProps } from './types';
 
 /**
  * Helper para agrupar e mesclar estilos responsivos (objetos { xs, sm, md, lg, xl })
@@ -159,6 +159,8 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         } else {
             flexDirectionValue = (props.column || props.displayFlex === 'column') ? 'column' : 'row';
         }
+
+
     }
 
     return {
@@ -178,6 +180,23 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         ...(props.evenly && { justifyContent: 'space-evenly' }),
         ...(props.full && { width: '100%', height: '100%' }),
     };
+};
+
+/**
+ * Gera os estilos de visibilidade responsiva (hideUp / hideDown).
+ */
+export const getVisibilityStyles = (theme: Theme, props: VisibilityProps): CSSObject => {
+    const styles: CSSObject = {};
+
+    if (props.hideUp) {
+        styles[theme.breakpoints.up(props.hideUp)] = { display: 'none !important' };
+    }
+
+    if (props.hideDown) {
+        styles[theme.breakpoints.down(props.hideDown)] = { display: 'none !important' };
+    }
+
+    return styles;
 };
 
 /**

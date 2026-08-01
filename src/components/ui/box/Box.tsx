@@ -7,7 +7,8 @@ import { Box as MuiBox } from '@mui/material';
 import { styled, CSSObject } from '@mui/material/styles';
 
 import {
-    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, getHoverStyles, getPositionStyles, applyColorToShadow, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS, POSITION_PROPS
+    getColor, getRadiusStyles, getFlexStyles, getSpacingStyles, getSizeStyles, getHoverStyles, getPositionStyles, getVisibilityStyles, applyColorToShadow, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS, POSITION_PROPS,
+    VISIBILITY_PROPS
 } from '@/components/styles';
 
 export const Box = styled(MuiBox as any, {
@@ -18,6 +19,7 @@ export const Box = styled(MuiBox as any, {
             ...HOVER_PROPS,
             ...SIZE_PROPS,
             ...POSITION_PROPS,
+            ...VISIBILITY_PROPS,
             'shadow', 'shadowSecondary', 'shadowColor', 'paper', 'bgcolor',
         ] as string[]).includes(prop as string),
 })<BoxProps>(({ theme, ...props }) => {
@@ -55,6 +57,9 @@ export const Box = styled(MuiBox as any, {
                 : theme.shadows[1]
         }),
 
-        ...getHoverStyles(theme, props.hover)
+        ...getHoverStyles(theme, props.hover),
+
+        // --- Visibilidade Responsiva ---
+        ...getVisibilityStyles(theme, props),
     } as CSSObject;
 }) as React.FC<BoxProps>;

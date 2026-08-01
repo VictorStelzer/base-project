@@ -13,6 +13,8 @@ export const FLEX_PROPS = [
     'evenly', 'full', 'gap', 'alignItems', 'justifyContent'
 ] as const;
 
+export const VISIBILITY_PROPS = ['hideUp', 'hideDown'] as const;
+
 export const RADIUS_PROPS = [
     'radius', 'circle', 'square',
 ] as const;

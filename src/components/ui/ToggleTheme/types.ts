@@ -1,6 +1,6 @@
-import { SpacingProps, SizeProps, FlexProps, PositionStyleProps } from '@/components/styles';
+import { SpacingProps, SizeProps, FlexProps, PositionStyleProps, VisibilityProps } from '@/components/styles';
 
-export interface ToggleThemeProps extends SpacingProps, SizeProps, FlexProps, PositionStyleProps {
+export interface ToggleThemeProps extends SpacingProps, SizeProps, FlexProps, PositionStyleProps, VisibilityProps {
     /** Se true, renderiza como um Switch. Caso contrário, como um IconButton. */
     switch?: boolean;
     /** Estilos CSS adicionais */

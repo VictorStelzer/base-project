@@ -3,7 +3,9 @@ import { IconButtonProps } from './types';
 import { IconButton as MuiIconButton } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import {
-    getSpacingStyles, getRadiusStyles, getFlexStyles, getHoverStyles, getSizeStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS, getColor
+    getSpacingStyles, getRadiusStyles, getFlexStyles, getHoverStyles, getSizeStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS, getColor,
+    VISIBILITY_PROPS,
+    getVisibilityStyles
 } from '@/components/styles';
 
 export const IconButton = styled(MuiIconButton as any, {
@@ -13,6 +15,7 @@ export const IconButton = styled(MuiIconButton as any, {
             ...HOVER_PROPS,
             ...LAYOUT_PROPS,
             ...SIZE_PROPS,
+            ...VISIBILITY_PROPS,
             'size',
             'bg',
             'color',
@@ -73,6 +76,7 @@ export const IconButton = styled(MuiIconButton as any, {
                     : alpha(resolvedColor, 0.2)
                 : alpha(resolvedColor, theme.palette.action.hoverOpacity),
             ...(hoverStyles['&:hover'] as any)
-        }
+        },
+        ...getVisibilityStyles(theme, props),
     };
 }) as React.FC<IconButtonProps>;

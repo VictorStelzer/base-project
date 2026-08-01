@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { AccordionProps as MuiAccordionProps, TypographyProps } from '@mui/material';
-import { SpacingProps, RadiusProps, SizeProps } from '@/components/styles';
+import { SpacingProps, RadiusProps, SizeProps, VisibilityProps } from '@/components/styles';
 
 /**
  * Raiz estilizada do accordion. Valores padrão do *shell* (só aplicados quando a prop correspondente não é passada):
@@ -8,7 +8,7 @@ import { SpacingProps, RadiusProps, SizeProps } from '@/components/styles';
  * - `radius` padrão `true` (usa `theme.shape.borderRadius` via estilos globais)
  * Quando `m` não é informado, o estado expandido zera a margem extra padrão do MUI (`&.Mui-expanded`).
  */
-export interface AccordionProps extends Omit<MuiAccordionProps, 'children' | 'title'>, SpacingProps, RadiusProps, SizeProps {
+export interface AccordionProps extends Omit<MuiAccordionProps, 'children' | 'title'>, SpacingProps, RadiusProps, SizeProps, VisibilityProps {
     /** Título do Accordion */
     title: ReactNode;
     /** Conteúdo do Accordion */

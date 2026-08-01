@@ -16,6 +16,7 @@ export * from './Chip'
 export * from './Badge'
 export * from './Divider'
 export * from './Accordion'
+export * from './Timeline'
 
 export * from './Image'
 export * from './Icon'

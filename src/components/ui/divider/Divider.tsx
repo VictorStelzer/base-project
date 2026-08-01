@@ -6,7 +6,7 @@ import { Divider as MuiDivider } from '@mui/material';
 
 import { styled, CSSObject } from '@mui/material/styles';
 
-import { getSpacingStyles, getColor, getRadiusStyles, SPACING_PROPS } from '@/components/styles';
+import { getSpacingStyles, getColor, getRadiusStyles, SPACING_PROPS, VISIBILITY_PROPS, getVisibilityStyles } from '@/components/styles';
 
 const CUSTOM_PROPS = ['color', 'thickness', 'size', 'vertical', 'radius'];
 
@@ -14,7 +14,8 @@ export const Divider = styled(MuiDivider as any, {
     shouldForwardProp: (prop) =>
         !([
             ...SPACING_PROPS,
-            ...CUSTOM_PROPS
+            ...CUSTOM_PROPS,
+            ...VISIBILITY_PROPS
         ] as string[]).includes(prop as string),
 })<DividerProps>(({ theme, ...props }) => {
     const isVertical = props.vertical || props.orientation === 'vertical';
@@ -57,5 +58,6 @@ export const Divider = styled(MuiDivider as any, {
         ...getSpacingStyles(theme, props),
         ...lineStyles,
         ...getRadiusStyles(theme, { radius: props.radius }),
+        ...getVisibilityStyles(theme, props),
     } as CSSObject;
 }) as React.FC<DividerProps>;

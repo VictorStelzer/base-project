@@ -41,8 +41,8 @@ export interface SizeProps {
 /** Props de layout flexbox e dimensões completas. */
 export interface FlexProps {
     displayFlex?: boolean | 'row' | 'column' | 'center';
-    row?: boolean | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    column?: boolean | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    row?: boolean | BreakpointKey;
+    column?: boolean | BreakpointKey;
     center?: boolean;
     between?: boolean;
     around?: boolean;
@@ -51,6 +51,14 @@ export interface FlexProps {
     justifyContent?: ResponsiveProp<boolean | "center" | "space-between" | "space-around" | "space-evenly" | "flex-start" | "flex-end">;
     alignItems?: ResponsiveProp<boolean | "center" | "space-between" | "space-around" | "space-evenly" | "flex-start" | "flex-end">;
     gap?: ResponsiveProp<number | string>;
+}
+
+/** Props de visibilidade responsiva — esconde o componente acima ou abaixo de um breakpoint. */
+export interface VisibilityProps {
+    /** Esconde o componente a partir do breakpoint (inclusive para cima). Ex: hideUp="md" esconde em md, lg, xl. */
+    hideUp?: BreakpointKey;
+    /** Esconde o componente abaixo do breakpoint. Ex: hideDown="md" esconde em xs, sm. */
+    hideDown?: BreakpointKey;
 }
 
 /**

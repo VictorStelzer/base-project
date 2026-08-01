@@ -2,7 +2,7 @@ import { LinkProps as MuiLinkProps } from '@mui/material';
 
 import { LinkProps as RouterLinkProps } from 'react-router-dom';
 
-import { BaseHoverProps, SpacingProps, SizeProps, FlexProps, TypographyStyleProps, SPACING_PROPS, SIZE_PROPS, FLEX_PROPS, TYPOGRAPHY_PROPS } from '@/components/styles';
+import { BaseHoverProps, SpacingProps, SizeProps, FlexProps, TypographyStyleProps, SPACING_PROPS, SIZE_PROPS, FLEX_PROPS, TYPOGRAPHY_PROPS, VisibilityProps } from '@/components/styles';
 
 /** HoverProps do TextButton — simplificado: só cor, escala e opacidade. */
 interface HoverProps extends Pick<BaseHoverProps, 'color' | 'scale' | 'opacity'> {}
@@ -18,6 +18,7 @@ export interface TextButtonProps extends
     SpacingProps,
     SizeProps,
     FlexProps,
+    VisibilityProps,
     TypographyStyleProps
 {
     /** Efeito de hover. Se objeto, aplica propriedades customizadas. */

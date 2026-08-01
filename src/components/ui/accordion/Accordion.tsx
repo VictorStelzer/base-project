@@ -1,14 +1,14 @@
 import React from 'react';
 import { Accordion as MuiAccordion, AccordionSummary as MuiAccordionSummary, AccordionDetails as MuiAccordionDetails, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ExpandMore } from '@mui/icons-material';
 
 import { AccordionProps } from './types';
-import { getSpacingStyles, getRadiusStyles, getSizeStyles, getColor, SPACING_PROPS, RADIUS_PROPS, SIZE_PROPS } from '@/components/styles';
+import { getSpacingStyles, getRadiusStyles, getSizeStyles, getVisibilityStyles, getColor, SPACING_PROPS, RADIUS_PROPS, SIZE_PROPS, VISIBILITY_PROPS } from '@/components/styles';
 
 const StyledAccordion = styled(MuiAccordion, {
     shouldForwardProp: (prop) =>
-        !([...SPACING_PROPS, ...RADIUS_PROPS, ...SIZE_PROPS, 'bgcolor', 'radius', 'divider', 'expandMarginReset'] as string[]).includes(prop as string)
+        !([...SPACING_PROPS, ...RADIUS_PROPS, ...SIZE_PROPS, ...VISIBILITY_PROPS, 'bgcolor', 'radius', 'divider', 'expandMarginReset'] as string[]).includes(prop as string)
 })<Partial<AccordionProps> & { expandMarginReset?: boolean }>(({ theme, ...props }) => ({
     backgroundColor: props.bgcolor ? getColor(theme, props.bgcolor) : theme.palette.background.paper,
     boxShadow: theme.shadows[1],
@@ -23,6 +23,7 @@ const StyledAccordion = styled(MuiAccordion, {
     '&.Mui-expanded': {
         ...(props.expandMarginReset ? { margin: 0 } : {}),
     },
+    ...getVisibilityStyles(theme, props as any),
 }));
 
 const StyledSummary = styled(MuiAccordionSummary)(({ theme }) => ({
@@ -68,7 +69,7 @@ export const Accordion: React.FC<AccordionProps> = ({
             expandMarginReset={m === undefined}
         >
             <StyledSummary
-                expandIcon={icon || <ExpandMoreIcon sx={{ color: iconColor ? getColor(theme, iconColor) : undefined }} />}
+                expandIcon={icon || <ExpandMore sx={{ color: iconColor ? getColor(theme, iconColor) : undefined }} />}
                 sx={{
                     flexDirection: iconPosition === 'start' ? 'row-reverse' : 'row',
                     '& .MuiAccordionSummary-expandIconWrapper': {

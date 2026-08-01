@@ -6,7 +6,7 @@ import { Chip as MuiChip } from '@mui/material';
 
 import { styled, CSSObject } from '@mui/material/styles';
 
-import { getSpacingStyles, getSizeStyles, getHoverStyles, getColor, SPACING_PROPS, HOVER_PROPS, SIZE_PROPS } from '@/components/styles';
+import { getSpacingStyles, getSizeStyles, getHoverStyles, getColor, SPACING_PROPS, HOVER_PROPS, SIZE_PROPS, getVisibilityStyles } from '@/components/styles';
 
 export const Chip = styled(MuiChip as any, {
     shouldForwardProp: (prop) =>
@@ -30,5 +30,8 @@ export const Chip = styled(MuiChip as any, {
 
         // --- Hover ---
         ...getHoverStyles(theme, props.hover),
+
+        // --- Visibilidade ---
+        ...getVisibilityStyles(theme, props)
     } as CSSObject;
 }) as React.FC<ChipProps>;

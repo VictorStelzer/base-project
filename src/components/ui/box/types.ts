@@ -1,6 +1,6 @@
 import { BoxProps as MuiBoxProps} from '@mui/material';
 
-import { BaseHoverProps, SpacingProps, FlexProps, RadiusProps, SizeProps, PositionStyleProps, SPACING_PROPS, FLEX_PROPS, SIZE_PROPS, POSITION_PROPS } from '@/components/styles';
+import { BaseHoverProps, SpacingProps, FlexProps, RadiusProps, SizeProps, PositionStyleProps, VisibilityProps, SPACING_PROPS, FLEX_PROPS, SIZE_PROPS, POSITION_PROPS } from '@/components/styles';
 
 /** HoverProps do Box — inclui shadowColor por suportar sombra colorida. */
 interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'shadowColor' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'zoom' | 'opacity'> {}
@@ -10,7 +10,7 @@ type ConflictingProps = typeof SPACING_PROPS[number] | typeof FLEX_PROPS[number]
 /**
  * Propriedades do componente Box, mesclando MUI com as nossas customizações.
  */
-export interface BoxProps extends Omit<MuiBoxProps, ConflictingProps>, SpacingProps, FlexProps, RadiusProps, SizeProps, PositionStyleProps {
+export interface BoxProps extends Omit<MuiBoxProps, ConflictingProps>, SpacingProps, FlexProps, RadiusProps, SizeProps, PositionStyleProps, VisibilityProps {
     /** Sombras pré-definidas do MUI. Se true, usa shadow 4. Se number, usa o índice da sombra (0-24). */
     shadow?: boolean | number;
     /** Cor da sombra. Aceita caminhos do tema. */

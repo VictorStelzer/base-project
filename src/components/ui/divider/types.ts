@@ -1,8 +1,8 @@
 import { DividerProps as MuiDividerProps } from "@mui/material";
 
-import { SpacingProps } from "@/components/styles";
+import { SpacingProps, VisibilityProps } from "@/components/styles";
 
-export interface DividerProps extends MuiDividerProps, SpacingProps {
+export interface DividerProps extends MuiDividerProps, SpacingProps, VisibilityProps {
     /** Cor da linha (caminho do tema, ex: 'primary.main'). Se omitido, usa `theme.palette.divider`. */
     color?: string;
     /** Espessura do traço (horizontal: `border-bottom-width`; vertical: `border-right-width`). Padrão: 1px. */

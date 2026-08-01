@@ -7,7 +7,9 @@ import { Button as MuiButton, CircularProgress, alpha } from '@mui/material';
 import { styled, CSSObject } from '@mui/material/styles';
 
 import {
-    getColor, getSpacingStyles, getRadiusStyles, getFlexStyles, getSizeStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS
+    getColor, getSpacingStyles, getRadiusStyles, getFlexStyles, getSizeStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS,
+    VISIBILITY_PROPS,
+    getVisibilityStyles
 } from '@/components/styles';
 
 const StyledButton = styled(MuiButton, {
@@ -17,6 +19,7 @@ const StyledButton = styled(MuiButton, {
             ...HOVER_PROPS,
             ...LAYOUT_PROPS,
             ...SIZE_PROPS,
+            ...VISIBILITY_PROPS,
             'textColor',
             'fontSize',
             'fontWeight',
@@ -50,6 +53,7 @@ const StyledButton = styled(MuiButton, {
         ...getFlexStyles(theme, props),
         ...getSpacingStyles(theme, props),
         ...getRadiusStyles(theme, props),
+        ...getVisibilityStyles(theme, props),
         ...(props.glass && {
             backgroundColor: theme.palette.mode === 'dark' ? alpha('#000', 0.2) : alpha('#fff', 0.2),
             backdropFilter: 'blur(10px)',

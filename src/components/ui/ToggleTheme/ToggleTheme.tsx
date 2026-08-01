@@ -1,4 +1,5 @@
-    import React from 'react';
+import React from 'react';
+
 import { styled } from '@mui/material/styles';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';

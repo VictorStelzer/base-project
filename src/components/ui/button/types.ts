@@ -1,5 +1,5 @@
 import { ButtonProps as MuiButtonProps } from '@mui/material';
-import { BaseHoverProps, SpacingProps, SizeProps, RadiusProps, FlexProps } from '@/components/styles';
+import { BaseHoverProps, SpacingProps, SizeProps, RadiusProps, FlexProps, VisibilityProps } from '@/components/styles';
 
 /** HoverProps do Button — color afeta o fundo (bgcolor), textColor afeta a cor do texto. */
 interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'color' | 'textColor' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> { }
@@ -7,7 +7,7 @@ interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'color' | 'textColo
 /**
  * Propriedades do componente Button, mesclando MUI com as nossas customizações.
  */
-export interface ButtonProps extends MuiButtonProps, SpacingProps, SizeProps, RadiusProps, FlexProps {
+export interface ButtonProps extends MuiButtonProps, SpacingProps, SizeProps, RadiusProps, FlexProps, VisibilityProps {
     /** Cor do texto. Aceita caminhos do tema (ex: 'primary.main') ou cores CSS. */
     textColor?: string;
     /** Efeito de hover. Se objeto, aplica propriedades customizadas. */

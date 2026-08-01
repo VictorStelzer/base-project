@@ -62,6 +62,8 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allPr
         optional,
         error,
         helperText,
+        hideDown,
+        hideUp,
         ...props
     } = allProps;
 

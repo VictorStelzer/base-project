@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { TextFieldProps } from '@mui/material';
 
-import { SizeProps, RadiusProps, SpacingProps, SPACING_PROPS, SIZE_PROPS, RADIUS_PROPS } from '@/components/styles';
+import { SizeProps, RadiusProps, SpacingProps, SPACING_PROPS, SIZE_PROPS, RADIUS_PROPS, VisibilityProps } from '@/components/styles';
 
 type ConflictingProps = typeof SPACING_PROPS[number] | typeof SIZE_PROPS[number] | typeof RADIUS_PROPS[number];
 
 export type MaskType = 'cpf' | 'cnpj' | 'cpfCnpj' | 'phone' | 'cardNumber' | 'expiryDate' | 'cep' | 'currency';
 
-export interface InputProps extends Omit<TextFieldProps, ConflictingProps>, RadiusProps, SizeProps, SpacingProps {
+export interface InputProps extends Omit<TextFieldProps, ConflictingProps>, RadiusProps, SizeProps, SpacingProps, VisibilityProps {
     /** Exibe o label acima do input (ao invés do label flutuante interno do TextField). */
     inputLabel?: string;
     /** 
