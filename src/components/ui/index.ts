@@ -11,6 +11,8 @@ export * from './TextButton'
 export * from './BackButton'
 
 export * from './Input'
+export * from './InputDate'
+export * from './Switch'
 
 export * from './Chip'
 export * from './Badge'
