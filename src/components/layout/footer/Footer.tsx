@@ -6,10 +6,10 @@ import { Box, Container, Text, Divider, Image, TextButton } from '@/components'
 
 export const Footer: React.FC = () => {
     return (
-        <Container column py={2} width="100%" bgcolor="#1C1C2B" color="grey.500">
+        <Container column py={2} width="100%" bgcolor="background.paper" color="grey.500">
             <Box py={6} row="md" gap={8}>
                 <Box column gap={3} width={{ xs: '100%', md: "20%" }}>
-                    <Image sx={{ filter: 'brightness(0) invert(1)' }} src={IMAGES.site.logo} width={100} />
+                    <Image sx={{ filter: 'brightness(0) invert(1)' }} src={IMAGES.site.logo} alt="Logo" width={100} />
                 </Box>
 
                 <Box row="md" gap={{ xs: 4, md: 24 }}>
