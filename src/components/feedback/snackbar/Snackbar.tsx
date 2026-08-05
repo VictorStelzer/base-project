@@ -1,7 +1,8 @@
 import React, { SyntheticEvent } from 'react';
-import { Snackbar as MuiSnackbar, SnackbarCloseReason, useTheme, SnackbarOrigin } from '@mui/material';
+import { Snackbar as MuiSnackbar, useTheme, SnackbarOrigin } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, IconButton, Text, SnackbarProps } from '@/components';
+import { SnackbarCloseReason } from './types';
 import { getColor } from '@/components/styles';
 
 export const Snackbar: React.FC<SnackbarProps> = ({
@@ -31,7 +32,7 @@ export const Snackbar: React.FC<SnackbarProps> = ({
     };
 
     const handleClose = (
-        event: Event | SyntheticEvent<any, Event>,
+        event: Event | SyntheticEvent<Element, Event>,
         reason?: SnackbarCloseReason,
     ) => {
         if (reason === 'clickaway') {
@@ -55,6 +56,8 @@ export const Snackbar: React.FC<SnackbarProps> = ({
             <Box
                 row
                 center
+                role="status"
+                aria-live="polite"
                 bgcolor={color}
                 px={2}
                 py={1.5}
@@ -79,8 +82,9 @@ export const Snackbar: React.FC<SnackbarProps> = ({
                 {close && (
                     <IconButton
                         color={textColor}
-                        onClick={(e) => handleClose(e, 'timeout')}
+                        onClick={(e) => handleClose(e, 'closeClick')}
                         ml={1}
+                        aria-label="Fechar"
                     >
                         <CloseIcon />
                     </IconButton>
