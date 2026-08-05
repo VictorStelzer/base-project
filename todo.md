@@ -16,15 +16,16 @@
 - [X] Input
 - [ ] Select
 - [ ] Checkbox
-- [ ] Input Date
+- [x] Input Date
 - [ ] Autocomplete
 - [ ] Radio
-- [ ] Switch
+- [x] Switch
 - [ ] Slider
 - [ ] FileUpload
 - [ ] Rating
 
-- [X] Accordion
+- [X] Accordion 
+- [X] Timeline
 - [ ] Stepper
 - [ ] Table
 - [ ] Pagination
@@ -48,11 +49,11 @@
 - [ ] Skeleton
 
 - [ ] Toast
-- [ ] Snackbar
+- [x] Snackbar
 
 - [ ] Modal
 - [ ] Dialog
-- [ ] Tooltip
+- [x] Tooltip
 - [ ] Popover
 
 - [X] Drawer
