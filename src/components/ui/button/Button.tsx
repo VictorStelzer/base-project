@@ -29,6 +29,14 @@ const StyledButton = styled(MuiButton, {
 })<ButtonProps>(({ theme, ...props }) => {
     // Button tem hover próprio: color = bgcolor, textColor = color
     const hoverStyles: CSSObject = props.hover ? {
+        // Prepara a borda transparente em repouso pra transição ficar suave (mesma técnica
+        // do getHoverStyles compartilhado, usado por Box/Paper/Chip) — sem isso a borda
+        // "pipoca" ao entrar no hover em vez de fazer fade-in.
+        ...(props.hover.borderColor && {
+            borderStyle: 'solid',
+            borderWidth: `${props.hover.borderWidth || 1}px`,
+            borderColor: 'transparent',
+        }),
         transition: 'all 0.2s ease-in-out',
         '&:hover': {
             ...(props.hover.shadow !== undefined && { boxShadow: theme.shadows[props.hover.shadow] }),
@@ -49,8 +57,8 @@ const StyledButton = styled(MuiButton, {
         ...(props.fontSize && { fontSize: props.fontSize }),
         ...(props.fontWeight && { fontWeight: props.fontWeight }),
         ...(props.textColor && { color: getColor(theme, props.textColor) }),
-        ...getSizeStyles(theme, props),
         ...getFlexStyles(theme, props),
+        ...getSizeStyles(theme, props),
         ...getSpacingStyles(theme, props),
         ...getRadiusStyles(theme, props),
         ...getVisibilityStyles(theme, props),
@@ -66,8 +74,15 @@ const StyledButton = styled(MuiButton, {
 
 export const Button: React.FC<ButtonProps> = ({ variant = 'contained', loading, children, disabled, startIcon, ...props }) => {
     return (
-        <StyledButton variant={variant} disabled={loading || disabled} startIcon={loading ? null : startIcon}{...props}>
-            {loading ? <CircularProgress size={24} color="inherit" /> : children}
+        <StyledButton
+            variant={variant}
+            disabled={loading || disabled}
+            startIcon={loading ? null : startIcon}
+            aria-busy={loading || undefined}
+            {...props}
+            aria-label={props['aria-label'] ?? (loading && typeof children === 'string' ? children : undefined)}
+        >
+            {loading ? <CircularProgress size={24} color="inherit" aria-hidden /> : children}
         </StyledButton>
     );
 };
