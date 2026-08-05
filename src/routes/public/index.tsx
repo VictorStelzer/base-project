@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import { routes } from '../constants';
+import { routes } from '@/routes/constants';
 import * as Pages from '@/pages/public';
 
 export const PublicRoutes = (
