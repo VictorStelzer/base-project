@@ -10,7 +10,7 @@ import { getSpacingStyles, getColor, getRadiusStyles, SPACING_PROPS, VISIBILITY_
 
 const CUSTOM_PROPS = ['color', 'thickness', 'size', 'vertical', 'radius'];
 
-export const Divider = styled(MuiDivider as any, {
+const StyledDivider = styled(MuiDivider, {
     shouldForwardProp: (prop) =>
         !([
             ...SPACING_PROPS,
@@ -60,4 +60,13 @@ export const Divider = styled(MuiDivider as any, {
         ...getRadiusStyles(theme, { radius: props.radius }),
         ...getVisibilityStyles(theme, props),
     } as CSSObject;
-}) as React.FC<DividerProps>;
+});
+
+export const Divider: React.FC<DividerProps> = ({ vertical, orientation, ...props }) => {
+    // `vertical` é um atalho de conveniência só de CSS; a prop real `orientation` do MUI é
+    // quem decide o elemento HTML renderizado (<hr> vs role="separator") e o aria-orientation.
+    // Sem repassá-la, o Divider fica visualmente vertical mas semanticamente horizontal pra
+    // leitores de tela.
+    const resolvedOrientation = vertical ? 'vertical' : orientation;
+    return <StyledDivider vertical={vertical} orientation={resolvedOrientation} {...props} />;
+};
