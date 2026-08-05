@@ -36,10 +36,5 @@ export interface InputProps extends Omit<TextFieldProps, ConflictingProps>, Radi
 
     /** Se true, adiciona o texto "(Opcional)" ao lado do inputLabel. */
     optional?: boolean;
-
-    /** Propriedades passadas para o componente Input do MUI */
-    InputProps?: any;
-    /** Propriedades passadas para o elemento HTML input */
-    inputProps?: any;
 }
 

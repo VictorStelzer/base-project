@@ -10,13 +10,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { Box, Text } from '@/components';
-import { getRadiusStyles, getColor, RADIUS_PROPS } from '@/components/styles';
+import { getRadiusStyles, getColor, RADIUS_PROPS, ResponsiveProp } from '@/components/styles';
 
 import { getMaskedValue, getMaxLength } from './utils';
 
 const StyledTextField = styled(TextField, {
     shouldForwardProp: (prop) => ![...RADIUS_PROPS, 'bgcolor', 'paper', 'customHeight'].includes(prop as string)
-})<any>(({ theme, ...props }) => {
+})<InputProps & { customHeight?: ResponsiveProp<number | string> }>(({ theme, ...props }) => {
     const bgColor = props.paper ? theme.palette.background.paper :
         props.bgcolor === true ? theme.palette.background.default :
             props.bgcolor ? getColor(theme, props.bgcolor) : undefined;
@@ -64,6 +64,7 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allPr
         helperText,
         hideDown,
         hideUp,
+        fullWidth = true,
         ...props
     } = allProps;
 
@@ -79,7 +80,13 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allPr
         }
     };
 
-    let startAdornment = props.InputProps?.startAdornment;
+    // O tipo de `slotProps.input`/`.htmlInput` do MUI aceita tanto um objeto quanto uma
+    // função de ownerState; este componente só suporta a forma de objeto (como o resto do
+    // Input), daí o cast pontual — não um `any` genérico espalhado pelo componente.
+    const inputSlotProps = props.slotProps?.input as { startAdornment?: React.ReactNode; endAdornment?: React.ReactNode } | undefined;
+    const htmlInputSlotProps = props.slotProps?.htmlInput as { maxLength?: number } | undefined;
+
+    let startAdornment = inputSlotProps?.startAdornment;
     if (icon) {
         startAdornment = (
             <InputAdornment position="start" sx={{ color: `${props.color || 'primary'}.main` }}>
@@ -88,7 +95,7 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allPr
         );
     }
 
-    let endAdornment = props.InputProps?.endAdornment;
+    let endAdornment = inputSlotProps?.endAdornment;
     if (password) {
         endAdornment = (
             <InputAdornment position="end">
@@ -114,9 +121,11 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allPr
 
     return (
         <Box
-            width={width || (props.fullWidth ? '100%' : 'auto')}
+            width={width || (fullWidth ? '100%' : 'auto')}
             p={p} pr={pr} pl={pl} pt={pt} pb={pb} px={px} py={py}
             m={m} ml={ml} mr={mr} mt={mt} mb={mb} mx={mx} my={my}
+            hideUp={hideUp}
+            hideDown={hideDown}
             column
         >
             {inputLabel && (
@@ -139,15 +148,18 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(function Input(allPr
                 circle={circle}
                 square={square}
                 customHeight={height}
-                fullWidth={true}
-                InputProps={{
-                    ...props.InputProps,
-                    startAdornment,
-                    endAdornment,
-                }}
-                inputProps={{
-                    ...props.inputProps,
-                    maxLength: mask ? getMaxLength(mask) : props.inputProps?.maxLength
+                fullWidth={fullWidth}
+                slotProps={{
+                    ...props.slotProps,
+                    input: {
+                        ...inputSlotProps,
+                        startAdornment,
+                        endAdornment,
+                    },
+                    htmlInput: {
+                        ...htmlInputSlotProps,
+                        maxLength: mask ? getMaxLength(mask) : htmlInputSlotProps?.maxLength,
+                    },
                 }}
             />
         </Box>
