@@ -13,7 +13,7 @@ export const Icon: React.FC<IconProps> = ({ icon, color = 'primary.main', size =
     const theme = useTheme();
 
     const resolvedColor = getColor(theme, color) || theme.palette.primary.main;
-    const backgroundColor = typeof bg === 'string' ? bg : bg === true ? alpha(resolvedColor, 0.1) : undefined;
+    const backgroundColor = typeof bg === 'string' ? getColor(theme, bg) : bg === true ? alpha(resolvedColor, 0.1) : undefined;
 
     return (
         <Box
@@ -35,8 +35,8 @@ export const Icon: React.FC<IconProps> = ({ icon, color = 'primary.main', size =
                 ...sx
             }}
         >
-            {React.isValidElement(icon)
-                ? React.cloneElement(icon as React.ReactElement<any>, { size })
+            {React.isValidElement<{ size?: string | number; color?: string }>(icon)
+                ? React.cloneElement(icon, { size, color })
                 : icon}
         </Box>
     );
