@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useNavigate } from 'react-router-dom';
 
-export const BackButton: React.FC<BackButtonProps> = ({ variant = 'text', label = 'Voltar', onClick, ...props }) => {
+export const BackButton: React.FC<BackButtonProps> = ({ variant = 'text', label = 'Voltar', onClick, startIcon, ...props }) => {
     const navigate = useNavigate();
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,7 +20,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ variant = 'text', label 
     };
 
     return (
-        <Button width='fit-content' fontWeight='bold' fontSize={20} {...props} variant={variant} onClick={handleClick} startIcon={<ArrowBackIcon />}>
+        <Button width='fit-content' fontWeight='bold' fontSize={20} {...props} variant={variant} onClick={handleClick} startIcon={startIcon ?? <ArrowBackIcon />}>
             {label}
         </Button>
     );
