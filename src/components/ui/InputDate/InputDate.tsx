@@ -24,7 +24,7 @@ export const InputDate: React.FC<InputDateProps> = (allProps) => {
         height = 45,
         required,
         optional,
-        fullWidth,
+        fullWidth = true,
         p, pr, pl, pt, pb, px, py,
         m, ml, mr, mt, mb, mx, my,
         hideDown,
@@ -51,7 +51,7 @@ export const InputDate: React.FC<InputDateProps> = (allProps) => {
     const popupPaperSx = {
         backgroundColor: theme.palette.background.default,
         backgroundImage: 'none',
-        border: '1px solid rgba(232,223,200,.18)',
+        border: `1px solid ${theme.palette.divider}`,
     };
 
     return (
@@ -59,6 +59,8 @@ export const InputDate: React.FC<InputDateProps> = (allProps) => {
             width={width || (fullWidth ? '100%' : 'auto')}
             p={p} pr={pr} pl={pl} pt={pt} pb={pb} px={px} py={py}
             m={m} ml={ml} mr={mr} mt={mt} mb={mb} mx={mx} my={my}
+            hideUp={hideUp}
+            hideDown={hideDown}
             column
         >
             {inputLabel && (
@@ -72,7 +74,8 @@ export const InputDate: React.FC<InputDateProps> = (allProps) => {
                 format={format}
                 slotProps={{
                     textField: {
-                        fullWidth: true,
+                        fullWidth,
+                        required,
                         error: hasError,
                         helperText: finalHelperText,
                         sx: {
