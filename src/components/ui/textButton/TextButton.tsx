@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 
 import { getSpacingStyles, getHoverStyles, getFlexStyles, getSizeStyles, getTypographyStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS, TYPOGRAPHY_PROPS, VISIBILITY_PROPS, getVisibilityStyles } from '@/components/styles';
 
-const StyledLink = styled(MuiLink as any, {
+const StyledLink = styled(MuiLink, {
     shouldForwardProp: (prop) =>
         !([
             ...SPACING_PROPS,
