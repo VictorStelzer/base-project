@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { styled } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
@@ -22,7 +22,7 @@ const AnimatedIconWrapper = styled('span', {
 // Estilos customizados para o Switch
 const SwitchTrack = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'isDark',
-})<{ isDark: boolean }>(({ isDark }) => ({
+})<{ isDark: boolean }>(({ theme, isDark }) => ({
     width: 60,
     height: 32,
     borderRadius: 16,
@@ -33,14 +33,14 @@ const SwitchTrack = styled(Box, {
     alignItems: 'center',
     transition: 'background 0.4s ease-in-out, box-shadow 0.4s ease',
     background: isDark
-        ? 'linear-gradient(135deg, #0F2027, #203A43, #2C5364)' // Céu noturno escuro gradiente
-        : "#70A1FF",
-    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+        ? `linear-gradient(135deg, ${theme.palette.grey[900]}, ${theme.palette.primary.dark})`
+        : theme.palette.primary.light,
+    boxShadow: `inset 0 2px 4px ${alpha(theme.palette.common.black, 0.1)}`,
 }));
 
 const SwitchThumb = styled('div', {
     shouldForwardProp: (prop) => prop !== 'isDark',
-})<{ isDark: boolean }>(({ isDark }) => ({
+})<{ isDark: boolean }>(({ theme, isDark }) => ({
     width: 26,
     height: 26,
     borderRadius: '50%',
@@ -51,10 +51,10 @@ const SwitchThumb = styled('div', {
     left: 3,
     transform: `translateX(${isDark ? 28 : 0}px)`,
     transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease, box-shadow 0.4s ease',
-    backgroundColor: isDark ? '#FFF9C4' : '#FFFFFF',
+    backgroundColor: isDark ? theme.palette.grey[100] : theme.palette.common.white,
     boxShadow: isDark
-        ? '0 2px 4px rgba(0,0,0,0.4), 0 0 8px rgba(255, 235, 59, 0.6)'
-        : '0 2px 4px rgba(0,0,0,0.2)',
+        ? `0 2px 4px ${alpha(theme.palette.common.black, 0.4)}, 0 0 8px ${alpha(theme.palette.warning.main, 0.6)}`
+        : `0 2px 4px ${alpha(theme.palette.common.black, 0.2)}`,
 }));
 
 const AnimatedSwitchIconWrapper = styled('div', {
@@ -71,15 +71,31 @@ export const ToggleTheme: React.FC<ToggleThemeProps> = ({ switch: isSwitch, ...p
     const { mode, toggleTheme } = useThemeMode();
     const isDark = mode === 'dark';
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+        }
+    };
+
     if (isSwitch) {
         return (
-            <SwitchTrack isDark={isDark} onClick={toggleTheme} {...props}>
+            <SwitchTrack
+                isDark={isDark}
+                onClick={toggleTheme}
+                onKeyDown={handleKeyDown}
+                role="switch"
+                aria-checked={isDark}
+                aria-label="Alternar tema"
+                tabIndex={0}
+                {...props}
+            >
                 <SwitchThumb isDark={isDark}>
                     <AnimatedSwitchIconWrapper isDark={isDark}>
                         {isDark ? (
-                            <Icon size={16} color="#424242" icon={<DarkModeIcon />} />
+                            <Icon size={16} color="grey.800" icon={<DarkModeIcon />} />
                         ) : (
-                            <Icon size={16} color="#F59E0B" icon={<LightModeIcon />} />
+                            <Icon size={16} color="warning.main" icon={<LightModeIcon />} />
                         )}
                     </AnimatedSwitchIconWrapper>
                 </SwitchThumb>
@@ -91,6 +107,7 @@ export const ToggleTheme: React.FC<ToggleThemeProps> = ({ switch: isSwitch, ...p
         <IconButton
             onClick={toggleTheme}
             color='text.secondary'
+            aria-label="Alternar tema"
             {...props}
         >
             <AnimatedIconWrapper isDark={isDark}>
