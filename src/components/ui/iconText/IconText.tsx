@@ -47,8 +47,8 @@ export const IconText: React.FC<IconTextProps> = ({ icon, color, size, children,
                     height: iconSize
                 }
             }}>
-                {React.isValidElement(icon.icon)
-                    ? React.cloneElement(icon.icon as React.ReactElement<any>, {
+                {React.isValidElement<{ size?: string | number; color?: string }>(icon.icon)
+                    ? React.cloneElement(icon.icon, {
                         ...(icon.color || color ? { color: icon.color || color } : {}),
                         size: iconSize,
                     })
