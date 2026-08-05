@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TextProps } from './types';
 
 import { Typography } from '@mui/material';
@@ -8,7 +6,7 @@ import { styled, CSSObject } from '@mui/material/styles';
 
 import { getColor, getSpacingStyles, getSizeStyles, getTypographyStyles, SPACING_PROPS, SIZE_PROPS, TYPOGRAPHY_PROPS, VISIBILITY_PROPS, getVisibilityStyles } from '@/components/styles';
 
-export const Text = styled(Typography as any, {
+export const Text = styled(Typography, {
     shouldForwardProp: (prop) =>
         !([
             ...SPACING_PROPS,
@@ -49,4 +47,4 @@ export const Text = styled(Typography as any, {
         ...gradientStyles,
         ...getVisibilityStyles(theme, props),
     } as CSSObject;
-}) as React.FC<TextProps>;
+});
