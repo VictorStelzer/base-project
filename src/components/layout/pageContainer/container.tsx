@@ -8,7 +8,7 @@ import { Container as ContainerMUI } from "@mui/material";
 
 export const Container: React.FC<ContainerProps> = ({ children, sx, ...props }) => {
     return (
-        <Box {...props} p px={1}>
+        <Box p px={1} {...props}>
             <ContainerMUI maxWidth="xl" sx={{ height: '100%' }}>
                 <Box
                     displayFlex
