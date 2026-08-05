@@ -3,7 +3,7 @@ import { AppRoutes } from './routes'
 import { BrowserRouter } from 'react-router-dom'
 
 import { MobileProvider } from '@/contexts/MobileContext'
-import { AppThemeProvider } from './contexts/ThemeContext'
+import { AppThemeProvider } from '@/contexts/ThemeContext'
 import { NotificationProvider } from '@/contexts/NotificationContext'
 
 function App() {
