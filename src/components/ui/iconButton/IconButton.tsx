@@ -1,14 +1,14 @@
 import React from 'react';
 import { IconButtonProps } from './types';
 import { IconButton as MuiIconButton } from '@mui/material';
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha, CSSObject } from '@mui/material/styles';
 import {
     getSpacingStyles, getRadiusStyles, getFlexStyles, getHoverStyles, getSizeStyles, SPACING_PROPS, HOVER_PROPS, LAYOUT_PROPS, SIZE_PROPS, getColor,
     VISIBILITY_PROPS,
     getVisibilityStyles
 } from '@/components/styles';
 
-export const IconButton = styled(MuiIconButton as any, {
+export const IconButton = styled(MuiIconButton, {
     shouldForwardProp: (prop) =>
         !([
             ...SPACING_PROPS,
@@ -23,7 +23,10 @@ export const IconButton = styled(MuiIconButton as any, {
             'radius'
         ] as string[]).includes(prop as string),
 })<IconButtonProps>(({ theme, ...props }) => {
-    // Resolve a cor principal
+    // Resolve a cor principal. O fallback `|| theme.palette.primary.main` não é alcançável
+    // em runtime (getColor sempre retorna string quando recebe uma string), mas é necessário
+    // para o TS enxergar `resolvedColor` como `string` (não `string | undefined`) nos usos
+    // abaixo em `alpha(resolvedColor, ...)`.
     const colorValue = props.color ? getColor(theme, props.color) : theme.palette.action.active;
     const resolvedColor = colorValue || theme.palette.primary.main;
 
@@ -41,18 +44,20 @@ export const IconButton = styled(MuiIconButton as any, {
         ...(props.color && { color: resolvedColor }),
         ...(backgroundColor && { backgroundColor }),
 
-        // Se bg for ativado, aplica um padding padrão se não especificado, e ajusta o radius
+        ...getSizeStyles(theme, props),
+        ...getFlexStyles(theme, props),
+        ...getSpacingStyles(theme, props),
+        ...getRadiusStyles(theme, props),
+
+        // Se bg for ativado, aplica um padding padrão (menor que o do Box) se não
+        // especificado, e ajusta o radius. Roda depois de getSpacingStyles/getRadiusStyles
+        // de propósito, pra realmente vencer os defaults genéricos quando bg está ativo.
         ...(props.bg && {
             borderRadius: props.circle ? '50%' : (typeof props.radius === 'number' ? props.radius : 12),
             padding: props.p !== undefined
                 ? (typeof props.p === 'number' ? theme.spacing(props.p) : (props.p === true ? '8px' : props.p))
                 : theme.spacing(1),
         }),
-
-        ...getSizeStyles(theme, props),
-        ...getFlexStyles(theme, props),
-        ...getSpacingStyles(theme, props),
-        ...getRadiusStyles(theme, props),
         ...(props.size !== undefined ? {
             '& svg, & .MuiSvgIcon-root': {
                 fontSize: props.size,
@@ -75,8 +80,8 @@ export const IconButton = styled(MuiIconButton as any, {
                     ? alpha(backgroundColor, 0.8)
                     : alpha(resolvedColor, 0.2)
                 : alpha(resolvedColor, theme.palette.action.hoverOpacity),
-            ...(hoverStyles['&:hover'] as any)
+            ...(hoverStyles['&:hover'] as CSSObject)
         },
         ...getVisibilityStyles(theme, props),
-    };
+    } as CSSObject;
 }) as React.FC<IconButtonProps>;
