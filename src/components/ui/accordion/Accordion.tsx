@@ -15,15 +15,15 @@ const StyledAccordion = styled(MuiAccordion, {
     '&:before': {
         display: 'none',
     },
-    ...getRadiusStyles(theme, props as any),
-    ...getSpacingStyles(theme, props as any),
-    ...getSizeStyles(theme, props as any),
+    ...getRadiusStyles(theme, props),
+    ...getSpacingStyles(theme, props),
+    ...getSizeStyles(theme, props),
     overflow: 'hidden',
     transition: 'all 0.3s ease-in-out',
     '&.Mui-expanded': {
         ...(props.expandMarginReset ? { margin: 0 } : {}),
     },
-    ...getVisibilityStyles(theme, props as any),
+    ...getVisibilityStyles(theme, props),
 }));
 
 const StyledSummary = styled(MuiAccordionSummary)(({ theme }) => ({
