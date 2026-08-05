@@ -45,14 +45,15 @@ const StyledTimeline = styled(MuiTimeline, {
             'items',
         ] as string[]).includes(prop as string),
 })<TimelineProps>(({ theme, ...props }) => {
-    const { position: _, ...styleProps } = props;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- descarta `position` de propósito antes de repassar o resto pros getXStyles
+    const { position: _position, ...styleProps } = props;
     return {
         padding: 0,
         margin: 0,
         ...getSpacingStyles(theme, styleProps),
         ...getSizeStyles(theme, styleProps),
         ...getVisibilityStyles(theme, styleProps),
-        ...getPositionStyles(theme, styleProps as any),
+        ...getPositionStyles(theme, styleProps),
     };
 });
 
@@ -71,6 +72,8 @@ export const SingleTimelineItem: React.FC<TimelineItemProps & { isLastItem?: boo
     hideConnector = false,
     isLast = false,
     isLastItem = false,
+    className,
+    style,
 }) => {
     const theme = useTheme();
 
@@ -107,6 +110,8 @@ export const SingleTimelineItem: React.FC<TimelineItemProps & { isLastItem?: boo
 
     return (
         <TimelineItem
+            className={className}
+            style={style}
             sx={{
                 minHeight: 'auto',
                 '&::before': oppositeContent ? undefined : { display: 'none' },
@@ -215,10 +220,16 @@ export const Timeline: React.FC<TimelineProps> & { Item: React.FC<TimelineItemPr
                     <SingleTimelineItem
                         key={index}
                         {...item}
+                        oppositeContent={item.oppositeContent ?? oppositeContent}
+                        bulletIcon={item.bulletIcon ?? bulletIcon}
+                        icon={item.icon ?? icon}
+                        bulletVariant={item.bulletVariant ?? bulletVariant}
                         bulletColor={item.bulletColor || bulletColor}
                         lineColor={item.lineColor || lineColor}
                         color={item.color || color}
                         size={item.size || size}
+                        hideConnector={item.hideConnector ?? hideConnector}
+                        isLast={item.isLast ?? isLast}
                         isLastItem={index === items.length - 1 || item.hideConnector || item.isLast}
                     />
                 ))}
@@ -233,14 +244,20 @@ export const Timeline: React.FC<TimelineProps> & { Item: React.FC<TimelineItemPr
             <StyledTimeline position={position} className={className} style={style} sx={sx} {...props}>
                 {childrenArray.map((child, index) => {
                     const isLastItem = index === childrenArray.length - 1;
-                    if (React.isValidElement(child)) {
-                        return React.cloneElement(child as React.ReactElement<any>, {
+                    if (React.isValidElement<TimelineItemProps & { isLastItem?: boolean }>(child)) {
+                        return React.cloneElement(child, {
                             key: child.key || index,
-                            isLastItem: (child.props as TimelineItemProps).hideConnector || (child.props as TimelineItemProps).isLast || isLastItem,
-                            bulletColor: (child.props as TimelineItemProps).bulletColor || bulletColor,
-                            lineColor: (child.props as TimelineItemProps).lineColor || lineColor,
-                            color: (child.props as TimelineItemProps).color || color,
-                            size: (child.props as TimelineItemProps).size || size,
+                            oppositeContent: child.props.oppositeContent ?? oppositeContent,
+                            bulletIcon: child.props.bulletIcon ?? bulletIcon,
+                            icon: child.props.icon ?? icon,
+                            bulletVariant: child.props.bulletVariant ?? bulletVariant,
+                            isLastItem: child.props.hideConnector || child.props.isLast || isLastItem,
+                            bulletColor: child.props.bulletColor || bulletColor,
+                            lineColor: child.props.lineColor || lineColor,
+                            color: child.props.color || color,
+                            size: child.props.size || size,
+                            hideConnector: child.props.hideConnector ?? hideConnector,
+                            isLast: child.props.isLast ?? isLast,
                         });
                     }
                     return child;
@@ -264,7 +281,10 @@ export const Timeline: React.FC<TimelineProps> & { Item: React.FC<TimelineItemPr
                 size={size}
                 hideConnector={hideConnector}
                 isLast={isLast}
-                isLastItem={hideConnector || isLast || true} // Item único solto por padrão não desenha linha abaixo dele
+                // Item único solto: por padrão não desenha linha abaixo dele, mas só quando
+                // hideConnector/isLast não foram informados — hideConnector/isLast (acima)
+                // já são repassados direto pro SingleTimelineItem e decidem via `shouldHide`.
+                isLastItem={hideConnector === undefined && isLast === undefined}
             >
                 {children}
             </SingleTimelineItem>
