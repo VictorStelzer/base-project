@@ -11,7 +11,7 @@ export const BulletText: React.FC<BulletTextProps> = ({ bullet = {}, color, size
     const theme = useTheme();
 
     const bulletColor = bullet.color ? getColor(theme, bullet.color) : (color ? getColor(theme, color) : theme.palette.text.primary);
-    const bulletSize = bullet.size || '6px';
+    const bulletSize = bullet.size ?? '6px';
     const textColor = color ? getColor(theme, color) : undefined;
     const textSize = size;
     const gap = bullet.gap ?? 1;
