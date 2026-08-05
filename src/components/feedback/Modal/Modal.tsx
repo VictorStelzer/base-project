@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 import { ModalProps } from './types';
 
@@ -9,10 +9,12 @@ import { Close } from '@mui/icons-material';
 import { Box, Text, IconButton } from '@/components';
 
 export const Modal: React.FC<ModalProps> = ({ open, onClose, children, close, paper, title, width }) => {
+    const titleId = useId();
+
     return (
         <MuiModal open={open} onClose={onClose} closeAfterTransition>
             <Fade in={open}>
-                {/* Wrapper do MUI puro só pra posicionamento/ref — nosso Box não repassa ref. */}
+                {/* Wrapper de posicionamento: precisa ser um elemento simples pro Fade clonar o ref nele. */}
                 <Box
                     sx={{
                         position: 'absolute',
@@ -25,6 +27,9 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children, close, pa
                     <Box
                         column
                         gap={2}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby={typeof title === 'string' ? titleId : undefined}
                         {...(paper ? { paper: true } : { bgcolor: 'background.default' })}
                         radius={12}
                         p={3}
@@ -40,12 +45,12 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children, close, pa
                             <Box row full between alignItems="center" gap={2}>
                                 {title ? (
                                     typeof title === 'string' ? (
-                                        <Text variant="h6" fontWeight="bold">{title}</Text>
+                                        <Text id={titleId} variant="h6" fontWeight="bold">{title}</Text>
                                     ) : title
                                 ) : <Box />}
 
                                 {close && (
-                                    <IconButton color='text.primary' onClick={onClose} size={18}>
+                                    <IconButton color='text.primary' onClick={onClose} size={18} aria-label="Fechar">
                                         <Close />
                                     </IconButton>
                                 )}
