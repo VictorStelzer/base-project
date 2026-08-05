@@ -4,6 +4,21 @@ import { Drawer as MuiDrawer, Collapse, ClickAwayListener } from '@mui/material'
 import { Box, IconButton, Icon } from '@/components';
 import { Menu, Close } from '@mui/icons-material';
 
+// Posição do painel inline em relação ao botão gatilho, conforme `location`.
+const getInlinePosition = (location: DrawerProps['location']) => {
+    switch (location) {
+        case 'bottom':
+            return { top: '100%', left: 0, width: '100%' };
+        case 'left':
+            return { top: 0, right: '100%' };
+        case 'right':
+            return { top: 0, left: '100%' };
+        case 'top':
+        default:
+            return { bottom: '100%', left: 0, width: '100%' };
+    }
+};
+
 export const Drawer: React.FC<DrawerProps> = ({
     location = 'top',
     icon,
@@ -12,6 +27,7 @@ export const Drawer: React.FC<DrawerProps> = ({
     children,
     ...props
 }) => {
+    const { sx, className } = props;
     const [open, setOpen] = useState(false);
 
     const defaultIcon = <Icon color='text.secondary' bg icon={<Menu />} />;
@@ -23,12 +39,12 @@ export const Drawer: React.FC<DrawerProps> = ({
         return (
             <ClickAwayListener onClickAway={() => setOpen(false)}>
                 <Box>
-                    <IconButton onClick={toggleOpen}>
+                    <IconButton onClick={toggleOpen} aria-label={open ? 'Fechar menu' : 'Abrir menu'}>
                         {open ? (iconClose || defaultIconClose) : (icon || defaultIcon)}
                     </IconButton>
-                    <Box position="absolute" top="100%" left={0} width="100%" zIndex={1200}>
+                    <Box position="absolute" zIndex={1200} {...getInlinePosition(location)}>
                         <Collapse in={open}>
-                            <Box bgcolor="background.default" p={3} shadow={3} onClick={() => setOpen(false)}>
+                            <Box bgcolor="background.default" p={3} shadow={3} className={className} sx={sx}>
                                 {children}
                             </Box>
                         </Collapse>
@@ -40,7 +56,7 @@ export const Drawer: React.FC<DrawerProps> = ({
 
     return (
         <>
-            <IconButton onClick={() => setOpen(true)}>
+            <IconButton onClick={() => setOpen(true)} aria-label="Abrir menu">
                 {icon || defaultIcon}
             </IconButton>
             <MuiDrawer
@@ -51,11 +67,11 @@ export const Drawer: React.FC<DrawerProps> = ({
             >
                 <Box p={2}>
                     <Box row sx={{ justifyContent: "flex-end" }} mb={2}>
-                        <IconButton onClick={() => setOpen(false)}>
+                        <IconButton onClick={() => setOpen(false)} aria-label="Fechar menu">
                             {iconClose || defaultIconClose}
                         </IconButton>
                     </Box>
-                    <Box onClick={() => setOpen(false)}>
+                    <Box>
                         {children}
                     </Box>
                 </Box>
