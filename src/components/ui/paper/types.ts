@@ -2,7 +2,7 @@ import { PaperProps as PaperPropsMUI } from '@mui/material';
 import { BaseHoverProps, SpacingProps, SizeProps, FlexProps, RadiusProps, SPACING_PROPS, FLEX_PROPS, SIZE_PROPS, VisibilityProps } from '@/components/styles';
 
 /** HoverProps do Paper — suporta shadow, bgcolor, color, border e scale. */
-interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> {}
+type HoverProps = Pick<BaseHoverProps, 'shadow' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'>;
 
 type ConflictingProps = typeof SPACING_PROPS[number] | typeof FLEX_PROPS[number] | typeof SIZE_PROPS[number];
 

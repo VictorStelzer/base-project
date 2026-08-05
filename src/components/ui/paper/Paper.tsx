@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { PaperProps } from './types';
 
 import { Paper as MuiPaper } from '@mui/material';
@@ -7,7 +5,7 @@ import { Paper as MuiPaper } from '@mui/material';
 import { styled, CSSObject, alpha } from '@mui/material/styles';
 
 import {
-    getColor, getSpacingStyles, getRadiusStyles, getFlexStyles, getHoverStyles, getSizeStyles, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS,
+    getColor, getSpacingStyles, getRadiusStyles, getFlexStyles, getHoverStyles, getSizeStyles, SPACING_PROPS, LAYOUT_PROPS, HOVER_PROPS, SIZE_PROPS,
     VISIBILITY_PROPS,
     getVisibilityStyles
 } from '@/components/styles';
@@ -18,8 +16,9 @@ export const Paper = styled(MuiPaper, {
             ...LAYOUT_PROPS,
             ...SPACING_PROPS,
             ...HOVER_PROPS,
+            ...SIZE_PROPS,
             ...VISIBILITY_PROPS,
-            'height', 'width', 'bgcolor', 'glass',
+            'bgcolor', 'glass',
         ] as string[]).includes(prop as string),
 })<PaperProps>(({ theme, ...props }) => {
     return {
@@ -43,4 +42,4 @@ export const Paper = styled(MuiPaper, {
         ...getHoverStyles(theme, props.hover),
         ...getVisibilityStyles(theme, props),
     } as CSSObject;
-}) as React.FC<PaperProps>;
+});
