@@ -2,14 +2,22 @@ import { Theme } from '@mui/material';
 
 import { CSSObject, alpha } from '@mui/material/styles';
 
-import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey, PositionStyleProps, TypographyStyleProps, VisibilityProps } from './types';
+import { SpacingProps, RadiusProps, BaseHoverProps, FlexProps, SizeProps, BreakpointKey, PositionStyleProps, TypographyStyleProps, VisibilityProps, ResponsiveProp } from './types';
 
 /**
  * Helper para agrupar e mesclar estilos responsivos (objetos { xs, sm, md, lg, xl })
  * em um único CSSObject sem sobrescrever media queries.
+ *
+ * `configs` é heterogêneo de propósito — cada chamador (getSpacingStyles, getSizeStyles,
+ * getFlexStyles, etc.) passa um `value`/`getStyles` com um tipo concreto diferente
+ * (string|number|boolean, FlexDirection, Position, ...). Trocar `any` por `unknown` aqui
+ * quebra a checagem de tipo dentro de cada `getStyles` (testado: ~30 erros em cascata,
+ * já que os retornos de CSSObject exigem tipos concretos como Position/FlexDirection/etc,
+ * não `unknown`). A segurança de tipo real já existe do lado de fora, em cada `getXStyles`.
  */
 export const applyResponsiveStyles = (
     theme: Theme,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ver comentário acima
     configs: { value: any; getStyles: (val: any) => CSSObject }[]
 ): CSSObject => {
     const result: CSSObject = {};
@@ -150,7 +158,7 @@ export const getFlexStyles = (theme: Theme, props: FlexProps): CSSObject => {
         props.alignItems ||
         props.gap !== undefined;
 
-    let flexDirectionValue: any = undefined;
+    let flexDirectionValue: ResponsiveProp<'row' | 'column'> | undefined = undefined;
     if (isFlex) {
         if (typeof props.row === 'string') {
             flexDirectionValue = { xs: 'column', [props.row]: 'row' };
