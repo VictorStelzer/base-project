@@ -3,7 +3,7 @@ import { BoxProps as MuiBoxProps} from '@mui/material';
 import { BaseHoverProps, SpacingProps, FlexProps, RadiusProps, SizeProps, PositionStyleProps, VisibilityProps, SPACING_PROPS, FLEX_PROPS, SIZE_PROPS, POSITION_PROPS } from '@/components/styles';
 
 /** HoverProps do Box — inclui shadowColor por suportar sombra colorida. */
-interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'shadowColor' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'zoom' | 'opacity'> {}
+type HoverProps = Pick<BaseHoverProps, 'shadow' | 'shadowColor' | 'bgcolor' | 'color' | 'borderColor' | 'borderWidth' | 'scale' | 'zoom' | 'opacity'>;
 
 type ConflictingProps = typeof SPACING_PROPS[number] | typeof FLEX_PROPS[number] | typeof SIZE_PROPS[number] | typeof POSITION_PROPS[number];
 

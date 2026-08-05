@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { BoxProps } from './types';
 
 import { Box as MuiBox } from '@mui/material';
@@ -11,7 +9,7 @@ import {
     VISIBILITY_PROPS
 } from '@/components/styles';
 
-export const Box = styled(MuiBox as any, {
+export const Box = styled(MuiBox, {
     shouldForwardProp: (prop) =>
         !([
             ...LAYOUT_PROPS,
@@ -62,4 +60,4 @@ export const Box = styled(MuiBox as any, {
         // --- Visibilidade Responsiva ---
         ...getVisibilityStyles(theme, props),
     } as CSSObject;
-}) as React.FC<BoxProps>;
+});
