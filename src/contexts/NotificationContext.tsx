@@ -1,6 +1,5 @@
-import React, { createContext, useState, useCallback, ReactNode } from 'react';
-import { SnackbarCloseReason } from '@mui/material';
-import { Snackbar, SnackbarProps } from '@/components';
+import React, { createContext, useState, useCallback, useMemo, ReactNode } from 'react';
+import { Snackbar, SnackbarProps, SnackbarCloseReason } from '@/components';
 
 export interface NotificationContextData {
     showSnackbar: (options: SnackbarProps) => void;
@@ -17,15 +16,17 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
         setOpen(true);
     }, []);
 
-    const handleClose = useCallback((_event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    const handleClose = useCallback((_event: React.SyntheticEvent | Event, reason: SnackbarCloseReason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false);
     }, []);
 
+    const value = useMemo(() => ({ showSnackbar }), [showSnackbar]);
+
     return (
-        <NotificationContext.Provider value={{ showSnackbar }}>
+        <NotificationContext.Provider value={value}>
             {children}
             <Snackbar
                 {...snackbarOptions}
