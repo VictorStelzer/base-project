@@ -2,7 +2,7 @@ import { ButtonProps as MuiButtonProps } from '@mui/material';
 import { BaseHoverProps, SpacingProps, SizeProps, RadiusProps, FlexProps, VisibilityProps } from '@/components/styles';
 
 /** HoverProps do Button — color afeta o fundo (bgcolor), textColor afeta a cor do texto. */
-interface HoverProps extends Pick<BaseHoverProps, 'shadow' | 'color' | 'textColor' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'> { }
+type HoverProps = Pick<BaseHoverProps, 'shadow' | 'color' | 'textColor' | 'borderColor' | 'borderWidth' | 'scale' | 'opacity'>;
 
 /**
  * Propriedades do componente Button, mesclando MUI com as nossas customizações.
